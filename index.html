@@ -1,1168 +1,658 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚽ FIFA World Cup 2026 – Live Center</title>
+<title>Trần Đức Thịnh — marginla</title>
+<meta name="description" content="Web3 creator, on-chain builder and RWA/domains investor. Arc House application profile.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+  :root{
+    --bg:#f5f6fb; --surface:#ffffff; --surface-2:#eef1f8;
+    --ink:#10121a; --ink-dim:#585e70; --line:rgba(16,18,26,.13);
+    --accent:#4b76f9; --accent-soft:#e8edfe; --accent-ink:#ffffff;
+    --good:#1c9660; --shadow: 0 1px 0 rgba(16,18,26,.04);
+    --font-display:'Space Grotesk','Segoe UI',sans-serif;
+    --font-body:'Inter','Segoe UI',sans-serif;
+    --font-mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0a0d14; --surface:#10141e; --surface-2:#161c29;
+      --ink:#edf0fa; --ink-dim:#8b93a8; --line:rgba(255,255,255,.10);
+      --accent:#6488ff; --accent-soft:#161f38; --accent-ink:#0a0d14;
+      --good:#39cf83; --shadow: 0 1px 0 rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0a0d14; --surface:#10141e; --surface-2:#161c29;
+    --ink:#edf0fa; --ink-dim:#8b93a8; --line:rgba(255,255,255,.10);
+    --accent:#6488ff; --accent-soft:#161f38; --accent-ink:#0a0d14;
+    --good:#39cf83; --shadow: 0 1px 0 rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--font-body); line-height:1.6; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  ::selection{background:var(--accent); color:var(--accent-ink);}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;}
 
-/* ───── THEME TOKENS ───── */
-[data-theme="dark"] {
-  --bg:       #080c10;
-  --bg2:      #0d1520;
-  --card:     rgba(13,21,32,0.85);
-  --card2:    rgba(18,28,44,0.9);
-  --border:   rgba(255,255,255,0.08);
-  --text:     #e8eef4;
-  --text2:    #8a9bb0;
-  --gold:     #f5a623;
-  --gold2:    #e8941a;
-  --live:     #ff3d3d;
-  --green:    #22c55e;
-  --shadow:   rgba(0,0,0,0.6);
-  --overlay:  rgba(8,12,16,0.7);
-  --hdr:      rgba(8,12,16,0.92);
-  --scroll:   #1e2d3f;
-}
-[data-theme="light"] {
-  --bg:       #f0f2f5;
-  --bg2:      #e4e8ed;
-  --card:     rgba(255,255,255,0.92);
-  --card2:    rgba(240,242,245,0.95);
-  --border:   rgba(0,0,0,0.1);
-  --text:     #0d1520;
-  --text2:    #5a6b7d;
-  --gold:     #c97a00;
-  --gold2:    #b06a00;
-  --live:     #e02020;
-  --green:    #16a34a;
-  --shadow:   rgba(0,0,0,0.15);
-  --overlay:  rgba(240,242,245,0.7);
-  --hdr:      rgba(240,242,245,0.96);
-  --scroll:   #c8d0da;
-}
+  header.site{position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+  .navrow{display:flex; align-items:center; justify-content:space-between; height:64px; gap:14px;}
+  .brand{display:flex; align-items:center; gap:9px; font-family:var(--font-mono); font-size:.92rem; letter-spacing:.01em; flex-shrink:0;}
+  .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);}
+  nav.links{display:flex; align-items:center; gap:24px; font-family:var(--font-mono); font-size:.86rem; color:var(--ink-dim);}
+  nav.links a{text-decoration:none; padding:4px 2px; border-bottom:1px solid transparent; white-space:nowrap;}
+  nav.links a:hover{color:var(--ink); border-color:var(--line);}
+  .navctl{display:flex; align-items:center; gap:10px; flex-shrink:0;}
+  .langswitch{display:flex; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .lang-btn{font-family:var(--font-mono); font-size:.7rem; padding:8px 9px; background:var(--surface); color:var(--ink-dim); border:none; border-right:1px solid var(--line); cursor:pointer;}
+  .lang-btn:last-child{border-right:none;}
+  .lang-btn.active{background:var(--accent); color:var(--accent-ink);}
+  #themeBtn{width:36px; height:36px; border-radius:8px; border:1px solid var(--line); background:var(--surface); color:var(--ink); display:flex; align-items:center; justify-content:center; cursor:pointer;}
+  #themeBtn svg{width:17px; height:17px;}
+  #themeBtn .moon{display:none;} :root[data-theme="dark"] #themeBtn .sun{display:none;} :root[data-theme="dark"] #themeBtn .moon{display:block;}
+  #navToggle{display:none; width:36px; height:36px; border-radius:8px; border:1px solid var(--line); background:var(--surface); align-items:center; justify-content:center; cursor:pointer;}
+  #navToggle span, #navToggle span::before, #navToggle span::after{content:""; display:block; width:16px; height:1.5px; background:var(--ink); position:relative;}
+  #navToggle span::before{position:absolute; top:-5px;} #navToggle span::after{position:absolute; top:5px;}
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  @media (max-width:900px){
+    nav.links{position:fixed; inset:64px 0 auto 0; flex-direction:column; align-items:flex-start; gap:0; background:var(--surface); border-bottom:1px solid var(--line); padding:8px 28px 18px; transform:translateY(-8px); opacity:0; pointer-events:none; transition:opacity .18s ease, transform .18s ease;}
+    nav.links.open{opacity:1; transform:translateY(0); pointer-events:auto;}
+    nav.links a{padding:10px 0; width:100%; border-bottom:1px solid var(--line);}
+    #navToggle{display:flex;}
+    .lang-btn{padding:7px 7px; font-size:.66rem;}
+  }
 
-::-webkit-scrollbar { width:6px; height:6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--scroll); border-radius:3px; }
+  section{padding:88px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .kicker{font-family:var(--font-mono); font-size:.82rem; color:var(--accent); margin:0 0 14px; text-transform:lowercase;}
+  h2.htitle{font-family:var(--font-display); font-weight:600; font-size:clamp(1.5rem,2.6vw,2rem); margin:0 0 30px; letter-spacing:-.01em;}
+  .prose{max-width:64ch; color:var(--ink-dim); font-size:1.02rem;}
+  .prose p{margin:0 0 16px;}
+  .prose strong{color:var(--ink); font-weight:600;}
 
-/* ───── BACKGROUND SLIDESHOW ───── */
-#bg-wrap {
-  position:fixed; inset:0; z-index:0;
-  overflow:hidden;
-}
-.bg-slide {
-  position:absolute; inset:0;
-  background-size:cover; background-position:center;
-  opacity:0; transition:opacity 1.6s ease;
-  filter: blur(3px) brightness(0.28) saturate(0.7);
-}
-[data-theme="light"] .bg-slide {
-  filter: blur(3px) brightness(0.55) saturate(0.5);
-}
-.bg-slide.active { opacity:1; }
+  .hero{padding-top:52px;}
 
-/* World Cup vibes via gradient "paintings" since external images may not load */
-.bg-slide:nth-child(1) { background: radial-gradient(ellipse at 30% 60%, #1a4a2e 0%, #0a1e12 40%, #000 100%),url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&q=80&auto=format') center/cover; }
-.bg-slide:nth-child(2) { background: radial-gradient(ellipse at 70% 40%, #1e1a00 0%, #0e0c00 40%, #000 100%),url('https://images.unsplash.com/photo-1551958219-acbc595b2d5f?w=1600&q=80&auto=format') center/cover; }
-.bg-slide:nth-child(3) { background: radial-gradient(ellipse at 50% 70%, #00112e 0%, #000b1e 40%, #000 100%),url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=1600&q=80&auto=format') center/cover; }
-.bg-slide:nth-child(4) { background: radial-gradient(ellipse at 20% 30%, #1e0a00 0%, #0e0500 40%, #000 100%),url('https://images.unsplash.com/photo-1459865264687-595d652de67e?w=1600&q=80&auto=format') center/cover; }
-.bg-slide:nth-child(5) { background: radial-gradient(ellipse at 80% 60%, #001a0a 0%, #000e05 40%, #000 100%),url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1600&q=80&auto=format') center/cover; }
+  /* Profile header: avatar + name + player, first thing on the page */
+  .profile-header{display:flex; align-items:center; gap:22px; flex-wrap:wrap; padding-bottom:30px; margin-bottom:34px; border-bottom:1px solid var(--line);}
+  .avatar-circle{width:96px; height:96px; border-radius:50%; background:linear-gradient(135deg, var(--accent), var(--accent-soft)); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:1.4rem; color:var(--accent-ink); border:1px solid var(--line); flex-shrink:0; overflow:hidden;}
+  .avatar-circle img{width:100%; height:100%; object-fit:cover; border-radius:50%;}
+  .profile-id-block{flex:1 1 auto; min-width:200px;}
+  .profile-id-block h1{font-family:var(--font-display); font-weight:700; font-size:clamp(1.7rem,3.4vw,2.3rem); line-height:1.06; margin:0 0 4px; letter-spacing:-.02em;}
+  .profile-id-block .handle{font-family:var(--font-mono); color:var(--accent); font-size:1rem; margin:0;}
+  .profile-header .player{margin-left:auto;}
+  @media (max-width:640px){ .profile-header{flex-direction:column; align-items:flex-start;} .profile-header .player{margin-left:0; width:100%;} }
 
-/* ───── LAYOUT ───── */
-body {
-  font-family:'Inter',sans-serif;
-  color:var(--text);
-  min-height:100vh;
-  position:relative;
-  overflow-x:hidden;
-  transition: color 0.3s, background 0.3s;
-}
-#app { position:relative; z-index:1; }
+  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:start;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero .role{color:var(--ink-dim); font-size:1.08rem; margin:0 0 4px; max-width:48ch;}
+  .quickfacts{display:flex; flex-wrap:wrap; gap:7px; margin:16px 0 16px;}
+  .hero .personal-note{color:var(--ink-dim); font-size:.96rem; max-width:50ch; margin:0 0 26px;}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:34px;}
+  .btn{font-family:var(--font-body); font-weight:600; font-size:.92rem; padding:11px 20px; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; border:1px solid transparent; cursor:pointer;}
+  .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--line);}
+  .btn:hover{filter:brightness(1.06);}
+  .social-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .badge-link{display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--line); border-radius:8px; text-decoration:none; font-size:.86rem; color:var(--ink-dim); background:var(--surface);}
+  .badge-link:hover{color:var(--ink); border-color:var(--accent);}
+  .badge-link .glyph{width:20px; height:20px; border-radius:5px; background:var(--surface-2); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:.66rem; font-weight:500; color:var(--ink);}
+  .ext::after{content:"↗"; margin-left:2px; font-size:.75em; opacity:.6;}
 
-/* ───── HEADER ───── */
-header {
-  position:sticky; top:0; z-index:200;
-  background: var(--hdr);
-  backdrop-filter: blur(20px);
-  border-bottom:1px solid var(--border);
-  height:60px; padding:0 20px;
-  display:flex; align-items:center; justify-content:space-between;
-  gap:12px;
-}
-.logo-wrap { display:flex; align-items:center; gap:10px; }
-.logo-icon { font-size:24px; }
-.logo-text {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:22px; letter-spacing:3px;
-  background:linear-gradient(90deg,var(--gold),var(--text),var(--gold2));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  line-height:1;
-}
-.logo-sub { font-size:9px; letter-spacing:4px; color:var(--text2); margin-top:2px; }
+  .idcard{background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:var(--shadow);}
+  .idcard-head{display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--line); background:var(--surface-2);}
+  .idcard-head .wdot{width:8px; height:8px; border-radius:50%; background:var(--line);}
+  .idcard-head span.label{margin-left:6px; font-family:var(--font-mono); font-size:.76rem; color:var(--ink-dim);}
+  .idcard-body{padding:22px 20px;}
+  .field-row{display:flex; justify-content:space-between; gap:14px; padding:9px 0; border-bottom:1px dashed var(--line); font-family:var(--font-mono); font-size:.84rem;}
+  .field-row:last-of-type{border-bottom:none;}
+  .field-row .k{color:var(--ink-dim);}
+  .field-row .v{color:var(--ink); text-align:right;}
+  .verified{color:var(--good);}
+  .pulse{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--good); margin-right:6px; animation:pulse 2.2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
+  .tag-strip{display:flex; flex-wrap:wrap; gap:7px; padding:16px 20px 20px; border-top:1px solid var(--line);}
+  .pill{font-family:var(--font-mono); font-size:.72rem; padding:5px 10px; border-radius:999px; background:var(--accent-soft); color:var(--accent);}
 
-.header-right { display:flex; align-items:center; gap:10px; }
+  .focus-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden;}
+  @media (max-width:820px){ .focus-grid{grid-template-columns:repeat(2,1fr);} }
+  .focus-cell{background:var(--surface); padding:24px 20px;}
+  .focus-cell h3{font-family:var(--font-mono); font-size:.76rem; color:var(--ink-dim); margin:0 0 12px; font-weight:500;}
+  .focus-cell .pill{background:var(--surface-2); color:var(--ink); margin:0 6px 6px 0; display:inline-block;}
 
-.live-pill {
-  background:var(--live); color:#fff;
-  font-size:10px; font-weight:700; letter-spacing:1.5px;
-  padding:3px 8px; border-radius:4px;
-  animation:blink 1.6s infinite;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.5} }
+  .work-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media (max-width:900px){ .work-grid{grid-template-columns:1fr;} }
+  .work-card{border:1px solid var(--line); border-radius:12px; padding:24px; background:var(--surface); display:flex; flex-direction:column; gap:12px;}
+  .work-card .tag{font-family:var(--font-mono); font-size:.72rem; color:var(--accent);}
+  .work-card h3{font-family:var(--font-display); font-size:1.15rem; margin:0; font-weight:600;}
+  .work-card p{color:var(--ink-dim); font-size:.92rem; margin:0; flex-grow:1;}
+  .work-card .stack{display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;}
+  .work-card .stack span{font-family:var(--font-mono); font-size:.68rem; color:var(--ink-dim); border:1px solid var(--line); padding:3px 8px; border-radius:6px;}
 
-/* THEME TOGGLE */
-.theme-toggle {
-  display:flex; align-items:center; gap:6px;
-  cursor:pointer; user-select:none;
-}
-.toggle-label { font-size:11px; font-weight:600; color:var(--text2); }
-.toggle-switch {
-  width:40px; height:22px; border-radius:11px;
-  background:var(--border); border:1px solid var(--border);
-  position:relative; cursor:pointer; transition:background .3s;
-  flex-shrink:0;
-}
-[data-theme="light"] .toggle-switch { background: #c8d0da; }
-[data-theme="dark"] .toggle-switch { background: #1e2d3f; }
-.toggle-knob {
-  position:absolute; top:2px; left:2px;
-  width:16px; height:16px; border-radius:50%;
-  background:var(--gold); transition:left .3s, background .3s;
-  display:flex; align-items:center; justify-content:center;
-  font-size:9px;
-}
-[data-theme="light"] .toggle-knob { left:20px; background: var(--gold2); }
-.toggle-knob::after { content:'🌙'; }
-[data-theme="light"] .toggle-knob::after { content:'☀️'; }
+  .why-grid{display:grid; grid-template-columns:1.3fr .9fr; gap:44px;}
+  @media (max-width:900px){ .why-grid{grid-template-columns:1fr;} }
+  blockquote{margin:0; padding:20px 22px; border-left:2px solid var(--accent); background:var(--surface); border-radius:0 10px 10px 0; font-family:var(--font-display); font-size:1.08rem; font-weight:500; color:var(--ink);}
+  blockquote cite{display:block; margin-top:10px; font-family:var(--font-mono); font-style:normal; font-size:.74rem; color:var(--ink-dim);}
 
-.refresh-btn {
-  background:transparent; border:1px solid var(--border);
-  color:var(--text2); padding:6px 12px; border-radius:6px;
-  cursor:pointer; font-size:11px; font-weight:700; letter-spacing:1px;
-  transition:all .2s;
-}
-.refresh-btn:hover { border-color:var(--gold); color:var(--gold); }
+  .mutual-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  @media (max-width:820px){ .mutual-grid{grid-template-columns:1fr;} }
+  .mutual-card{border:1px solid var(--line); border-radius:12px; padding:26px; background:var(--surface);}
+  .mutual-card h3{font-family:var(--font-mono); font-size:.8rem; color:var(--ink-dim); margin:0 0 16px; font-weight:500;}
+  .mutual-card ul{margin:0; padding:0; list-style:none;}
+  .mutual-card li{padding:10px 0; border-top:1px solid var(--line); font-size:.95rem; color:var(--ink-dim); display:flex; gap:10px;}
+  .mutual-card li:first-child{border-top:none;}
+  .mutual-card li::before{content:"—"; color:var(--accent); flex-shrink:0;}
 
-/* ───── SCOREBAR ───── */
-.scorebar {
-  background:rgba(0,0,0,0.4); backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  padding:0 20px; display:flex; gap:0;
-  overflow-x:auto; white-space:nowrap;
-  scrollbar-width:none;
-}
-.scorebar::-webkit-scrollbar { display:none; }
-.sb-item {
-  display:inline-flex; align-items:center; gap:8px;
-  padding:8px 16px; font-size:12px;
-  border-right:1px solid var(--border);
-  flex-shrink:0;
-}
-.sb-flag { font-size:16px; }
-.sb-name { color:var(--text2); font-weight:500; }
-.sb-score { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--text); }
-.sb-tag { font-size:9px; font-weight:800; letter-spacing:1px; padding:2px 5px; border-radius:3px; }
-.sb-live { background:var(--live); color:#fff; animation:blink 1.6s infinite; }
-.sb-ft { background:rgba(138,155,176,.15); color:var(--text2); }
-.sb-up { background:rgba(245,166,35,.12); color:var(--gold); }
+  .player{display:flex; align-items:center; gap:14px; border:1px solid var(--line); border-radius:12px; padding:10px 16px; background:var(--surface);}
+  .play-btn{width:42px; height:42px; flex-shrink:0; border-radius:50%; border:1px solid var(--line); background:var(--surface-2); color:var(--ink); display:flex; align-items:center; justify-content:center; cursor:pointer;}
+  .play-btn svg{width:14px; height:14px;}
+  .play-btn .icon-pause{display:none;}
+  .player[data-state="playing"] .play-btn .icon-play{display:none;}
+  .player[data-state="playing"] .play-btn .icon-pause{display:block;}
+  .player-info{display:flex; flex-direction:column; gap:4px; min-width:0;}
+  .np-label{font-family:var(--font-mono); font-size:.68rem; color:var(--ink-dim); text-transform:lowercase;}
+  .np-track{font-size:.9rem; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:190px;}
+  .eq{display:flex; align-items:flex-end; gap:3px; height:14px; margin-top:2px;}
+  .eq span{width:3px; background:var(--accent); height:4px; border-radius:2px; opacity:.55; display:block;}
+  .player[data-state="playing"] .eq span{animation:eqbounce 0.9s ease-in-out infinite;}
+  .eq span:nth-child(2){animation-delay:.15s;} .eq span:nth-child(3){animation-delay:.3s;} .eq span:nth-child(4){animation-delay:.45s;}
+  @keyframes eqbounce{0%,100%{height:4px;} 50%{height:14px;}}
 
-/* ───── TABS ───── */
-.tabs {
-  background:rgba(0,0,0,0.3); backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  padding:0 20px; display:flex; gap:0;
-  overflow-x:auto; scrollbar-width:none;
-}
-.tabs::-webkit-scrollbar { display:none; }
-.tab {
-  padding:13px 18px; font-size:12px; font-weight:700;
-  letter-spacing:.5px; color:var(--text2); cursor:pointer;
-  border-bottom:3px solid transparent; white-space:nowrap;
-  transition:all .2s;
-}
-.tab.active { color:var(--gold); border-bottom-color:var(--gold); }
-.tab:hover:not(.active) { color:var(--text); }
-
-/* ───── CONTAINER ───── */
-.container { max-width:1360px; margin:0 auto; padding:20px; }
-.two-col { display:grid; grid-template-columns:1fr 360px; gap:20px; }
-@media(max-width:1060px) { .two-col { grid-template-columns:1fr; } }
-
-.tab-content { display:none; }
-.tab-content.active { display:block; }
-
-/* ───── SECTION HEAD ───── */
-.sec-head {
-  display:flex; align-items:center; gap:8px; margin-bottom:14px;
-}
-.sec-title {
-  font-family:'Bebas Neue',sans-serif; font-size:19px;
-  letter-spacing:2px; color:var(--gold);
-}
-.sec-badge {
-  font-size:10px; font-weight:700; color:var(--text2);
-  background:var(--card); border:1px solid var(--border);
-  padding:2px 8px; border-radius:8px;
-}
-
-/* ───── MATCH CARDS ───── */
-.matches { display:flex; flex-direction:column; gap:8px; }
-
-.mcard {
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:12px; padding:14px 18px;
-  cursor:default; transition:all .2s;
-  backdrop-filter:blur(10px);
-  position:relative; overflow:hidden;
-}
-.mcard:hover { border-color:rgba(245,166,35,.4); transform:translateY(-1px); box-shadow:0 8px 32px var(--shadow); }
-.mcard.is-live { border-left:3px solid var(--live); }
-.mcard.is-live::before {
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(255,61,61,.04) 0%,transparent 45%);
-  pointer-events:none;
-}
-
-.mcard-top {
-  display:flex; justify-content:space-between; align-items:center;
-  margin-bottom:10px;
-}
-.mcard-meta { font-size:10px; color:var(--text2); font-weight:600; letter-spacing:.5px; }
-.mcard-status {
-  font-size:10px; font-weight:800; letter-spacing:1px;
-  padding:3px 8px; border-radius:4px;
-}
-.s-live { background:rgba(255,61,61,.15); color:var(--live); animation:blink 1.6s infinite; }
-.s-ft   { background:rgba(138,155,176,.1); color:var(--text2); }
-.s-up   { background:rgba(245,166,35,.1);  color:var(--gold); }
-
-.mcard-teams {
-  display:flex; align-items:center;
-  justify-content:space-between; gap:10px;
-}
-.mteam {
-  display:flex; align-items:center; gap:10px;
-  flex:1; cursor:pointer; border-radius:8px;
-  padding:4px 6px; transition:background .15s;
-}
-.mteam:hover { background:rgba(245,166,35,.08); }
-.mteam.away { flex-direction:row-reverse; }
-
-/* FLAG using twemoji CDN */
-.flag-img {
-  width:40px; height:28px;
-  object-fit:cover; border-radius:3px;
-  flex-shrink:0;
-  box-shadow:0 1px 4px var(--shadow);
-}
-.flag-fallback { font-size:28px; line-height:1; flex-shrink:0; }
-
-.mteam-info { flex:1; min-width:0; }
-.mteam-name { font-size:14px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.mteam.away .mteam-info { text-align:right; }
-.mteam-hint { font-size:10px; color:var(--text2); margin-top:1px; }
-
-.mscore-block { flex-shrink:0; text-align:center; }
-.mscore-row { display:flex; align-items:center; gap:6px; }
-.mscore {
-  font-family:'JetBrains Mono',monospace;
-  font-size:30px; font-weight:700; min-width:26px; line-height:1;
-}
-.mscore-sep { color:var(--text2); font-size:18px; }
-.mscore-time { font-size:10px; color:var(--text2); margin-top:3px; }
-
-/* ───── SIDEBAR / NEWS ───── */
-.news-list { display:flex; flex-direction:column; gap:10px; }
-.ncard {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:10px; overflow:hidden; backdrop-filter:blur(10px);
-  transition:all .2s; cursor:default;
-}
-.ncard:hover { border-color:rgba(245,166,35,.35); }
-.ncard-tag {
-  font-size:10px; font-weight:800; letter-spacing:1px;
-  padding:5px 12px;
-  background:linear-gradient(90deg,var(--gold2),var(--gold));
-  color:#060a0e;
-}
-.ncard-body { padding:12px 14px; }
-.ncard-title { font-size:13px; font-weight:700; line-height:1.4; margin-bottom:4px; }
-.ncard-text { font-size:11px; color:var(--text2); line-height:1.5; }
-.ncard-time { font-size:10px; color:var(--text2); margin-top:6px; font-weight:600; opacity:.7; }
-
-/* ───── AI PANEL ───── */
-.ai-wrap { max-width:720px; }
-.ai-box {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:12px; overflow:hidden; backdrop-filter:blur(10px);
-}
-.ai-hdr {
-  padding:12px 16px; background:rgba(0,0,0,.2);
-  border-bottom:1px solid var(--border);
-  display:flex; align-items:center; gap:10px;
-}
-.ai-dot { width:8px;height:8px;border-radius:50%;background:var(--gold);animation:blink 2s infinite; }
-.ai-title { font-size:13px; font-weight:700; }
-.ai-sub { font-size:10px; color:var(--text2); margin-left:auto; }
-
-.ai-msgs {
-  padding:14px; max-height:400px; overflow-y:auto;
-  display:flex; flex-direction:column; gap:10px;
-}
-.ai-msg {
-  background:var(--card2); border:1px solid var(--border);
-  border-radius:8px; padding:10px 12px;
-  font-size:13px; line-height:1.6; max-width:90%;
-}
-.ai-msg.user {
-  align-self:flex-end; text-align:right;
-  background:rgba(245,166,35,.08);
-  border-color:rgba(245,166,35,.2);
-  max-width:80%;
-}
-.ai-msg.bot { align-self:flex-start; }
-.ai-bottom {
-  padding:12px; border-top:1px solid var(--border);
-  display:flex; gap:8px; align-items:flex-end;
-}
-.ai-input {
-  flex:1; background:var(--card2); border:1px solid var(--border);
-  border-radius:8px; color:var(--text); padding:9px 12px;
-  font-size:13px; font-family:'Inter',sans-serif; resize:none;
-  outline:none; min-height:38px; max-height:100px; overflow-y:auto;
-  transition:border .2s;
-}
-.ai-input:focus { border-color:var(--gold); }
-.ai-send {
-  background:var(--gold); color:#060a0e;
-  border:none; border-radius:8px; padding:9px 16px;
-  font-weight:800; font-size:12px; cursor:pointer;
-  transition:all .2s; white-space:nowrap;
-  font-family:'Inter',sans-serif;
-}
-.ai-send:hover { background:var(--gold2); transform:scale(1.03); }
-.ai-send:disabled { opacity:.35; cursor:not-allowed; transform:none; }
-
-/* Quick questions */
-.quick-qs { display:flex; flex-wrap:wrap; gap:6px; padding:0 14px 12px; }
-.quick-q {
-  font-size:11px; padding:5px 10px; border-radius:6px;
-  border:1px solid var(--border); color:var(--text2); cursor:pointer;
-  background:var(--card2); transition:all .15s;
-}
-.quick-q:hover { border-color:var(--gold); color:var(--gold); }
-
-/* ───── STANDINGS ───── */
-.grp-tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
-.grp-tab {
-  padding:6px 13px; border-radius:6px;
-  border:1px solid var(--border); background:var(--card);
-  color:var(--text2); font-size:11px; font-weight:800;
-  cursor:pointer; transition:all .2s; backdrop-filter:blur(8px);
-}
-.grp-tab.active { background:var(--gold); color:#060a0e; border-color:var(--gold); }
-.grp-tab:hover:not(.active) { border-color:var(--gold); color:var(--gold); }
-
-.stand-table {
-  width:100%; border-collapse:collapse;
-  background:var(--card); border-radius:12px;
-  overflow:hidden; backdrop-filter:blur(10px);
-  max-width:660px;
-}
-.stand-table th {
-  padding:10px 12px; text-align:left;
-  font-size:9px; color:var(--text2); font-weight:800; letter-spacing:1px;
-  border-bottom:1px solid var(--border);
-  background:rgba(0,0,0,.15);
-}
-.stand-table td { padding:10px 12px; border-bottom:1px solid rgba(255,255,255,.04); font-size:13px; }
-.stand-table tr:last-child td { border-bottom:none; }
-.stand-table tr:hover td { background:rgba(245,166,35,.05); }
-.rank-cell { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--text2); }
-.rank-cell.q { color:var(--green); }
-.pts-cell { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--gold); }
-.flag-cell { font-size:20px; line-height:1; }
-.flag-img-sm { width:24px;height:17px;object-fit:cover;border-radius:2px; }
-
-/* ───── TEAM MODAL ───── */
-.modal-bg {
-  position:fixed; inset:0; z-index:500;
-  background:rgba(0,0,0,.75); backdrop-filter:blur(6px);
-  display:none; align-items:center; justify-content:center; padding:16px;
-}
-.modal-bg.open { display:flex; }
-.modal {
-  background:var(--bg2); border:1px solid var(--border);
-  border-radius:16px; width:100%; max-width:640px;
-  max-height:90vh; overflow-y:auto;
-  animation:slideUp .28s ease;
-  backdrop-filter:blur(20px);
-}
-@keyframes slideUp { from{transform:translateY(24px);opacity:0} to{transform:translateY(0);opacity:1} }
-
-.modal-hdr {
-  padding:18px 22px; border-bottom:1px solid var(--border);
-  display:flex; align-items:center; justify-content:space-between;
-  position:sticky; top:0; background:var(--bg2); z-index:1;
-}
-.modal-flag-wrap { display:flex; align-items:center; gap:14px; }
-.modal-flag-img { width:64px;height:44px;object-fit:cover;border-radius:5px;box-shadow:0 2px 12px var(--shadow); }
-.modal-flag-fb { font-size:52px; line-height:1; }
-.modal-team-name { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; }
-.modal-team-sub { font-size:11px; color:var(--gold); font-weight:700; margin-top:2px; }
-.close-btn {
-  width:34px; height:34px; border-radius:8px;
-  background:var(--card); border:1px solid var(--border);
-  color:var(--text2); font-size:16px; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  transition:all .2s;
-}
-.close-btn:hover { color:var(--text); border-color:var(--text2); }
-
-.modal-body { padding:20px 22px; }
-.stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
-.stat-box {
-  background:var(--card); border:1px solid var(--border);
-  border-radius:10px; padding:12px; text-align:center;
-}
-.stat-val { font-family:'Bebas Neue',sans-serif; font-size:30px; color:var(--gold); line-height:1; }
-.stat-lbl { font-size:10px; color:var(--text2); font-weight:700; letter-spacing:.5px; margin-top:2px; }
-
-.modal-sec { margin-bottom:18px; }
-.modal-sec-title {
-  font-size:10px; font-weight:800; color:var(--gold);
-  letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;
-}
-.scorers-list { display:flex; flex-wrap:wrap; gap:6px; }
-.scorer-pill {
-  font-size:12px; padding:4px 10px; border-radius:6px;
-  background:rgba(245,166,35,.08); border:1px solid rgba(245,166,35,.2);
-}
-.scorer-min { color:var(--text2); }
-
-.players-tbl { width:100%; border-collapse:collapse; font-size:12px; }
-.players-tbl th {
-  padding:7px 10px; font-size:9px; color:var(--text2);
-  font-weight:800; letter-spacing:1px; text-align:left;
-  border-bottom:1px solid var(--border);
-}
-.players-tbl td { padding:9px 10px; border-bottom:1px solid rgba(255,255,255,.04); }
-.players-tbl tr:last-child td { border-bottom:none; }
-.players-tbl tr:hover td { background:rgba(245,166,35,.04); }
-.pos-badge {
-  font-size:9px; font-weight:800; color:var(--text2);
-  background:var(--card); border:1px solid var(--border);
-  padding:2px 5px; border-radius:3px;
-}
-.goals-cell { color:var(--gold); font-weight:700; }
-.card-y { width:9px;height:13px;border-radius:1px;background:#fbbf24;display:inline-block;margin:0 1px; }
-.card-r { width:9px;height:13px;border-radius:1px;background:#ef4444;display:inline-block;margin:0 1px; }
-
-/* ───── LOADING ───── */
-.loader { text-align:center; padding:28px; color:var(--text2); font-size:13px; }
-.spin {
-  width:22px;height:22px; border:2px solid var(--border);
-  border-top-color:var(--gold); border-radius:50%;
-  animation:spin .7s linear infinite; margin:0 auto 10px;
-}
-@keyframes spin { to{transform:rotate(360deg)} }
-
-/* NEWS full-tab grid */
-.news-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
-
-/* AI typing indicator */
-.typing { display:flex; gap:4px; align-items:center; padding:4px 0; }
-.typing span { width:6px;height:6px;border-radius:50%;background:var(--gold);animation:dot .9s infinite; }
-.typing span:nth-child(2) { animation-delay:.2s; }
-.typing span:nth-child(3) { animation-delay:.4s; }
-@keyframes dot { 0%,80%,100%{transform:scale(.6);opacity:.5} 40%{transform:scale(1);opacity:1} }
+  .connect-grid{display:flex; flex-wrap:wrap; gap:12px; margin-top:26px;}
+  footer{padding:32px 0 60px; font-family:var(--font-mono); font-size:.78rem; color:var(--ink-dim); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
 </style>
 </head>
 <body>
 
-<!-- Background slideshow -->
-<div id="bg-wrap">
-  <div class="bg-slide active"></div>
-  <div class="bg-slide"></div>
-  <div class="bg-slide"></div>
-  <div class="bg-slide"></div>
-  <div class="bg-slide"></div>
-</div>
-
-<div id="app">
-
-<!-- HEADER -->
-<header>
-  <div class="logo-wrap">
-    <span class="logo-icon">⚽</span>
-    <div>
-      <div class="logo-text">FIFA WORLD CUP 2026</div>
-      <div class="logo-sub">NORTH AMERICA · JUNE 11 – JULY 19</div>
+<header class="site">
+  <div class="wrap navrow">
+    <div class="brand"><span class="dot"></span> marginla</div>
+    <nav class="links" id="navLinks">
+      <a href="#about" data-i18n="nav.about">about</a>
+      <a href="#focus" data-i18n="nav.focus">focus</a>
+      <a href="#work" data-i18n="nav.work">work</a>
+      <a href="#why-arc-house" data-i18n="nav.why">why-arc-house</a>
+      <a href="#connect" data-i18n="nav.connect">connect</a>
+    </nav>
+    <div class="navctl">
+      <div class="langswitch" role="group" aria-label="Language">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="vi">VI</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+      </div>
+      <button id="themeBtn" aria-label="Toggle color theme">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+      </button>
+      <button id="navToggle" aria-label="Open menu"><span></span></button>
     </div>
-  </div>
-  <div class="header-right">
-    <div class="live-pill">🔴 LIVE</div>
-    <div class="theme-toggle" onclick="toggleTheme()">
-      <span class="toggle-label" id="theme-lbl">DARK</span>
-      <div class="toggle-switch"><div class="toggle-knob"></div></div>
-    </div>
-    <button class="refresh-btn" onclick="refreshAll()">↻ CẬP NHẬT</button>
   </div>
 </header>
 
-<!-- SCORE BAR -->
-<div class="scorebar" id="scorebar">
-  <div class="sb-item"><span class="sb-tag sb-ft">FT</span><span class="sb-flag" id="f-mex"></span><span class="sb-name">Mexico</span><span class="sb-score">2–0</span><span class="sb-name">Nam Phi</span><span class="sb-flag" id="f-rsa"></span></div>
-  <div class="sb-item"><span class="sb-tag sb-ft">FT</span><span class="sb-flag" id="f-kor"></span><span class="sb-name">Hàn Quốc</span><span class="sb-score">0–1</span><span class="sb-name">Séc</span><span class="sb-flag" id="f-cze"></span></div>
-  <div class="sb-item"><span class="sb-tag sb-up">HÔM NAY</span><span class="sb-flag" id="f-can"></span><span class="sb-name">Canada</span><span class="sb-score">vs</span><span class="sb-name">Bosnia</span><span class="sb-flag" id="f-bih"></span><span class="sb-name" style="color:var(--gold);font-size:10px;font-weight:700;">22:00</span></div>
-  <div class="sb-item"><span class="sb-tag sb-up">HÔM NAY</span><span class="sb-flag" id="f-usa"></span><span class="sb-name">Mỹ</span><span class="sb-score">vs</span><span class="sb-name">Paraguay</span><span class="sb-flag" id="f-pry"></span><span class="sb-name" style="color:var(--gold);font-size:10px;font-weight:700;">03:00+1</span></div>
-</div>
+<section class="hero">
+  <div class="wrap">
 
-<!-- TABS -->
-<div class="tabs">
-  <div class="tab active" onclick="switchTab('matches',this)">⚽ LỊCH &amp; KẾT QUẢ</div>
-  <div class="tab" onclick="switchTab('standings',this)">📊 BẢNG XẾP HẠNG</div>
-  <div class="tab" onclick="switchTab('news',this)">📰 TIN TỨC NÓNG</div>
-  <div class="tab" onclick="switchTab('ai',this)">🤖 AI PHÂN TÍCH</div>
-</div>
+    <!-- AVATAR: initials shown by default. To use a real photo, upload it in chat and it will be embedded here as an <img>. -->
+    <div class="profile-header">
+      <div class="avatar-circle" id="avatarCircle">TĐT</div>
+      <div class="profile-id-block">
+        <h1>Trần Đức Thịnh</h1>
+        <p class="handle">marginla</p>
+      </div>
+      <!-- MUSIC PLAYER: plays a short original ambient tone by default. To use a real track, upload the mp3 in chat. -->
+      <div class="player" id="musicPlayer" data-state="paused">
+        <button id="playBtn" class="play-btn" aria-label="Play or pause">
+          <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+        <div class="player-info">
+          <span class="np-label" data-i18n="player.now_playing">now playing</span>
+          <span class="np-track" data-i18n="player.track_placeholder">A track I love — playlist coming soon</span>
+          <div class="eq"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
 
-<div class="container">
-
-  <!-- MATCHES -->
-  <div id="tab-matches" class="tab-content active">
-    <div class="two-col">
+    <div class="hero-grid">
       <div>
-        <div class="sec-head">
-          <div class="sec-title">TRẬN ĐẤU</div>
-          <div class="sec-badge" id="match-badge">đang tải…</div>
+        <p class="role" data-i18n="hero.role">Web3 creator at Loyal Company, and an on-chain builder / RWA &amp; domains investor working out of Hanoi, Vietnam.</p>
+        <div class="quickfacts">
+          <span class="pill" data-i18n="hero.pill.age">25 yo</span>
+          <span class="pill" data-i18n="hero.pill.height">172 cm</span>
+          <span class="pill" data-i18n="hero.pill.weight">70 kg</span>
+          <span class="pill" data-i18n="hero.pill.marital">Single</span>
+          <span class="pill" data-i18n="hero.pill.zodiac">Pisces</span>
         </div>
-        <div class="matches" id="matches-list">
-          <div class="loader"><div class="spin"></div>Đang tải từ API thực…</div>
+        <p class="personal-note" data-i18n="hero.personal_note">Cheerful, easygoing, and gentle — freelancing in crypto trading and affiliate work, fluent in English, Vietnamese, and Chinese. Always up for meeting new people; single and open to it.</p>
+        <div class="cta-row">
+          <a href="#why-arc-house" class="btn btn-primary" data-i18n="hero.cta.why">Why Arc House</a>
+          <a href="#work" class="btn btn-ghost" data-i18n="hero.cta.work">See selected work</a>
+        </div>
+        <div class="social-row">
+          <a class="badge-link ext" href="https://x.com/lanqiuzhiwang" target="_blank" rel="noopener"><span class="glyph">X</span> @lanqiuzhiwang</a>
+          <a class="badge-link ext" href="https://github.com/mengyoulangzi" target="_blank" rel="noopener"><span class="glyph">GH</span> mengyoulangzi</a>
+          <a class="badge-link ext" href="https://www.linkedin.com/in/margin-la-3bbaa5348/" target="_blank" rel="noopener"><span class="glyph">in</span> LinkedIn</a>
+          <a class="badge-link ext" href="https://domainsportfolio.xyz/" target="_blank" rel="noopener"><span class="glyph">⌂</span> domainsportfolio.xyz</a>
         </div>
       </div>
-      <div>
-        <div class="sec-head"><div class="sec-title">TIN NÓNG</div></div>
-        <div class="news-list" id="sidebar-news">
-          <div class="loader"><div class="spin"></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- STANDINGS -->
-  <div id="tab-standings" class="tab-content">
-    <div class="sec-head"><div class="sec-title">BẢNG XẾP HẠNG</div></div>
-    <div class="grp-tabs" id="grp-tabs"></div>
-    <div id="stand-content"><div class="loader"><div class="spin"></div></div></div>
-  </div>
-
-  <!-- NEWS -->
-  <div id="tab-news" class="tab-content">
-    <div class="sec-head"><div class="sec-title">TIN TỨC MỚI NHẤT</div></div>
-    <div id="news-full"><div class="loader"><div class="spin"></div>Đang tải từ AI…</div></div>
-  </div>
-
-  <!-- AI -->
-  <div id="tab-ai" class="tab-content">
-    <div class="sec-head"><div class="sec-title">AI PHÂN TÍCH</div><div class="sec-badge">Claude AI</div></div>
-    <div class="ai-wrap">
-      <div class="ai-box">
-        <div class="ai-hdr">
-          <div class="ai-dot"></div>
-          <div class="ai-title">Claude – Chuyên gia World Cup 2026</div>
-          <div class="ai-sub">Powered by Anthropic</div>
+      <div class="idcard">
+        <div class="idcard-head"><span class="wdot"></span><span class="wdot"></span><span class="wdot"></span><span class="label">profile.card</span></div>
+        <div class="idcard-body">
+          <div class="field-row"><span class="k" data-i18n="idcard.k.handle">handle</span><span class="v">marginla</span></div>
+          <div class="field-row"><span class="k" data-i18n="idcard.k.company">company</span><span class="v">Loyal Company</span></div>
+          <div class="field-row"><span class="k" data-i18n="idcard.k.location">location</span><span class="v">Hanoi, Vietnam</span></div>
+          <div class="field-row"><span class="k" data-i18n="idcard.k.based">based</span><span class="v">Vạn Xuân, Thái Bình</span></div>
+          <div class="field-row"><span class="k" data-i18n="idcard.k.region">region focus</span><span class="v" data-i18n="idcard.v.region">APAC · AU · NZ</span></div>
+          <div class="field-row"><span class="k" data-i18n="idcard.k.discord">discord</span><span class="v">@marginla</span></div>
+          <div class="field-row"><span class="k" data-i18n="idcard.k.status">status</span><span class="v"><span class="pulse"></span><span data-i18n="idcard.v.status">building</span></span></div>
+          <div class="field-row"><span class="k" data-i18n="idcard.k.human">human check</span><span class="v verified" data-i18n="idcard.v.human">verified ✓</span></div>
         </div>
-        <div class="ai-msgs" id="ai-msgs">
-          <div class="ai-msg bot">
-            👋 Xin chào! Tôi là AI phân tích World Cup 2026. Bạn có thể hỏi tôi về:<br><br>
-            ⚽ Phân tích &amp; dự đoán trận đấu<br>
-            📊 Thống kê đội tuyển &amp; cầu thủ<br>
-            🏆 Lịch sử đối đầu giữa các đội<br>
-            📰 Diễn giải tin tức mới nhất<br><br>
-            Hãy đặt câu hỏi hoặc chọn gợi ý bên dưới!
-          </div>
-        </div>
-        <div class="quick-qs">
-          <div class="quick-q" onclick="askQuick('Ai sẽ vô địch World Cup 2026?')">🏆 Ai vô địch?</div>
-          <div class="quick-q" onclick="askQuick('Phân tích Brazil vs Morocco ngày 14/6')">🇧🇷 Brazil vs Morocco</div>
-          <div class="quick-q" onclick="askQuick('Messi có ghi bàn tại World Cup 2026 không?')">⭐ Messi 2026</div>
-          <div class="quick-q" onclick="askQuick('Đội tuyển Việt Nam có tham dự World Cup 2026 không?')">🇻🇳 Việt Nam?</div>
-          <div class="quick-q" onclick="askQuick('Top 5 cầu thủ đáng xem nhất World Cup 2026')">🌟 Top cầu thủ</div>
-        </div>
-        <div class="ai-bottom">
-          <textarea class="ai-input" id="ai-input" placeholder="Hỏi về World Cup 2026…" rows="1"
-            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAI()}"
-            oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
-          <button class="ai-send" id="ai-send-btn" onclick="sendAI()">GỬI ▶</button>
+        <div class="tag-strip">
+          <span class="pill" data-i18n="pill.sectors.trading">Exchanges &amp; Trading</span>
+          <span class="pill" data-i18n="pill.sectors.identity">Identity</span>
+          <span class="pill" data-i18n="pill.sectors.rwa">RWA</span>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-</div><!-- /container -->
-</div><!-- /app -->
-
-<!-- TEAM MODAL -->
-<div class="modal-bg" id="modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <div class="modal-hdr">
-      <div class="modal-flag-wrap">
-        <div id="modal-flag-el"></div>
-        <div>
-          <div class="modal-team-name" id="modal-name">–</div>
-          <div class="modal-team-sub" id="modal-sub">–</div>
-        </div>
-      </div>
-      <button class="close-btn" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body" id="modal-body">
-      <div class="loader"><div class="spin"></div></div>
+<section id="about">
+  <div class="wrap">
+    <p class="kicker" data-i18n="about.kicker">about</p>
+    <h2 class="htitle" data-i18n="about.heading">A builder who trades, and a trader who builds</h2>
+    <div class="prose">
+      <p data-i18n-html="about.p1">I'm Trần Đức Thịnh (<strong>marginla</strong>), a Web3 enthusiast and crypto content creator with a strong passion for blockchain innovation, digital culture, and emerging technologies. Over the past few years I've actively explored the crypto ecosystem, with hands-on experience across DeFi, NFTs, AI-related projects, on-chain communities, and social growth within Web3.</p>
+      <p data-i18n="about.p2">I'm especially drawn to market narratives, domain branding, community engagement, and the evolution of decentralized technologies. My focus isn't only on finding promising projects early — it's on building real connections and feeding useful insight back into the wider crypto community.</p>
+      <p data-i18n="about.p3">Always learning, always building, and always trying to stay ahead of the next trend in Web3.</p>
     </div>
   </div>
-</div>
+</section>
+
+<section id="focus">
+  <div class="wrap">
+    <p class="kicker" data-i18n="focus.kicker">focus &amp; stack</p>
+    <h2 class="htitle" data-i18n="focus.heading">Where I spend my time</h2>
+    <div class="focus-grid">
+      <div class="focus-cell">
+        <h3 data-i18n="focus.cell.sectors">sectors</h3>
+        <div><span class="pill" data-i18n="pill.sectors.trading">Exchanges &amp; Trading</span><span class="pill" data-i18n="pill.sectors.identity">Identity</span><span class="pill" data-i18n="pill.sectors.rwa">RWA</span></div>
+      </div>
+      <div class="focus-cell">
+        <h3 data-i18n="focus.cell.languages">languages</h3>
+        <div><span class="pill">TypeScript / JavaScript</span><span class="pill">C++</span></div>
+      </div>
+      <div class="focus-cell">
+        <h3 data-i18n="focus.cell.role">role</h3>
+        <div><span class="pill" data-i18n="pill.role.researcher">Researcher / Analyst</span><span class="pill" data-i18n="pill.role.developer">Developer</span><span class="pill" data-i18n="pill.role.investor">Investor</span></div>
+      </div>
+      <div class="focus-cell">
+        <h3 data-i18n="focus.cell.region">region</h3>
+        <div><span class="pill" data-i18n="pill.region.apac">Asia-Pacific</span><span class="pill" data-i18n="pill.region.au">Australia</span><span class="pill" data-i18n="pill.region.nz">New Zealand</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <p class="kicker" data-i18n="work.kicker">selected work</p>
+    <h2 class="htitle" data-i18n="work.heading">What I've actually shipped</h2>
+    <div class="work-grid">
+      <div class="work-card">
+        <span class="tag" data-i18n="work.tag1">Arc Testnet · hackathon build</span>
+        <h3>ArcPay</h3>
+        <p data-i18n="work.desc1">A DeFi payment dApp built on Arc Testnet: wallet connection, USDC send/receive with QR codes, USDC↔EURC swap, lending &amp; borrowing, liquidity pools, and an integrated AI agent tab — shipped as a single-file app end to end.</p>
+        <div class="stack"><span>USDC</span><span>Arc Testnet</span><span>DeFi</span></div>
+      </div>
+      <div class="work-card">
+        <span class="tag" data-i18n="work.tag2">Doma Mainnet · trading infra</span>
+        <h3 data-i18n="work.title2">Domain-token tooling</h3>
+        <p data-i18n="work.desc2">A Node.js sniper bot for newly launched domain tokens with slippage-protected execution, plus an MCP-connected research workflow for marketplace listings and purchase automation — built alongside a live fractional-domain portfolio.</p>
+        <div class="stack"><span>Node.js</span><span>Doma Protocol</span><span>RWA</span></div>
+      </div>
+      <div class="work-card">
+        <span class="tag" data-i18n="work.tag3">Personal tool</span>
+        <h3 data-i18n="work.title3">Web3 dashboard</h3>
+        <p data-i18n="work.desc3">A self-built, single-file dashboard for tracking on-chain positions and market context across the projects I follow — iterated over several versions as my own needs changed.</p>
+        <div class="stack"><span>JavaScript</span><span>On-chain data</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why-arc-house">
+  <div class="wrap why-grid">
+    <div>
+      <p class="kicker" data-i18n="why.kicker">why arc house</p>
+      <h2 class="htitle" data-i18n="why.heading">I've already built on Arc — I want to keep going somewhere with people who care</h2>
+      <div class="prose">
+        <p data-i18n-html="why.p1">I'm applying to Arc House because I've spent time building on Arc, not just watching it from the sidelines. For a hackathon I built <strong>ArcPay</strong>, a DeFi payment app on Arc Testnet with wallet connection, USDC send/receive, QR-code payments, USDC↔EURC swaps, lending, borrowing, and liquidity pools. That project is what made <strong>USDC as native gas</strong> click for me in a way reading about it never did — when the gas token and the settlement asset are the same thing, payments UX becomes a genuinely different design problem, and it's the single feature of Arc I'm most excited to keep building around.</p>
+        <p data-i18n="why.p2">The rest of my work sits right next to that. I invest in and build tooling around tokenized domains on Doma — a sniper bot for new domain-token launches and an MCP-based research workflow for the marketplace. Domains are one of the clearer on-chain identity and RWA primitives that already exist, and a chain built around real payments feels like a natural settlement layer for that kind of asset to eventually move through.</p>
+        <p data-i18n="why.p3">Joining Arc House is a chance to bring that identity/RWA angle into a room that's mostly thinking about trading and exchanges, and to pressure-test my own payments work against builders who are further along than I am.</p>
+      </div>
+    </div>
+    <div>
+      <blockquote>
+        <span data-i18n="why.quote">USDC as native gas is the one Arc feature I'm most excited to keep building around.</span>
+        <cite data-i18n="why.cite">— from building ArcPay on Arc Testnet</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker" data-i18n="mutual.kicker">mutual benefit</p>
+    <h2 class="htitle" data-i18n="mutual.heading">What this membership is worth to both sides</h2>
+    <div class="mutual-grid">
+      <div class="mutual-card">
+        <h3 data-i18n="mutual.bring.heading">what I bring to Arc House</h3>
+        <ul>
+          <li data-i18n="mutual.bring.li1">Hands-on Arc Testnet build experience with ArcPay, not just theory about the chain</li>
+          <li data-i18n="mutual.bring.li2">TypeScript/JavaScript and C++ engineering I can put toward Arc-native tooling</li>
+          <li data-i18n="mutual.bring.li3">A domains/RWA and identity lens the trading-heavy side of the community can borrow from</li>
+          <li data-i18n="mutual.bring.li4">Content and community-building practice I can point at Arc for an APAC audience</li>
+          <li data-i18n="mutual.bring.li5">Direct feedback from someone already shipping payments UX on the chain</li>
+        </ul>
+      </div>
+      <div class="mutual-card">
+        <h3 data-i18n="mutual.want.heading">what I'm hoping to get back</h3>
+        <ul>
+          <li data-i18n="mutual.want.li1">Closer contact with the Arc team and builders further along than I am</li>
+          <li data-i18n="mutual.want.li2">Early signal on where the payments and RWA narrative is heading</li>
+          <li data-i18n="mutual.want.li3">Technical feedback on ArcPay and whatever I build on Arc next</li>
+          <li data-i18n="mutual.want.li4">Collaborators for domains × payments crossover ideas with Doma</li>
+          <li data-i18n="mutual.want.li5">A community to route my APAC-region insight and market reads through</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="connect">
+  <div class="wrap">
+    <p class="kicker" data-i18n="connect.kicker">connect</p>
+    <h2 class="htitle" data-i18n="connect.heading">Let's build</h2>
+    <p class="prose" data-i18n="connect.intro">Reachable across the usual places — happy to talk Arc, Doma, domains, or payments UX any time.</p>
+    <div class="connect-grid">
+      <a class="badge-link ext" href="https://x.com/lanqiuzhiwang" target="_blank" rel="noopener"><span class="glyph">X</span> @lanqiuzhiwang</a>
+      <a class="badge-link ext" href="https://github.com/mengyoulangzi" target="_blank" rel="noopener"><span class="glyph">GH</span> mengyoulangzi</a>
+      <a class="badge-link ext" href="https://www.linkedin.com/in/margin-la-3bbaa5348/" target="_blank" rel="noopener"><span class="glyph">in</span> LinkedIn</a>
+      <a class="badge-link ext" href="https://domainsportfolio.xyz/" target="_blank" rel="noopener"><span class="glyph">⌂</span> domainsportfolio.xyz</a>
+      <span class="badge-link"><span class="glyph">Dc</span> <span data-i18n="connect.discord">Discord: @marginla</span></span>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>Vietnam · Hanoi / Vạn Xuân, Thái Bình</span>
+  <span data-i18n="footer.tag">marginla — human, not an LLM</span>
+</footer>
 
 <script>
-// ══════════════════════════════════════════════
-// FLAGS via Flagpedia CDN (reliable, free)
-// ══════════════════════════════════════════════
-const FLAG_CODES = {
-  'Mexico':'mx','South Africa':'za','South Korea':'kr','Czech Republic':'cz',
-  'Poland':'pl','Canada':'ca','Bosnia & Herzegovina':'ba','Qatar':'qa',
-  'Switzerland':'ch','Brazil':'br','Morocco':'ma','Haiti':'ht','Scotland':'gb-sct',
-  'USA':'us','Paraguay':'py','Australia':'au','Turkey':'tr','Germany':'de',
-  'Ivory Coast':'ci','Ecuador':'ec','Netherlands':'nl','Japan':'jp',
-  'Sweden':'se','Tunisia':'tn','Belgium':'be','Egypt':'eg','Iran':'ir',
-  'New Zealand':'nz','Spain':'es','Cape Verde':'cv','Algeria':'dz',
-  'Jordan':'jo','Iraq':'iq','Argentina':'ar','Croatia':'hr','Portugal':'pt',
-  'England':'gb-eng','France':'fr','Senegal':'sn','Norway':'no','Saudi Arabia':'sa',
-  'Colombia':'co','Ghana':'gh','DR Congo':'cd','Austria':'at','Uruguay':'uy',
-  'Uzbekistan':'uz','Panama':'pa','Iraq':'iq','Curaçao':'cw',
-};
+(function(){
+  var root = document.documentElement;
+  var stored = null;
+  try { stored = localStorage.getItem('theme'); } catch(e) {}
+  if (stored === 'light' || stored === 'dark') root.setAttribute('data-theme', stored);
 
-function flagUrl(teamName) {
-  const code = FLAG_CODES[teamName];
-  if (!code) return null;
-  return `https://flagcdn.com/w40/${code}.png`;
-}
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var current = root.getAttribute('data-theme') || (prefersDark ? 'dark' : 'light');
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch(e) {}
+  });
 
-function flagHtml(teamName, size='md') {
-  const url = flagUrl(teamName);
-  const cls = size==='lg' ? 'modal-flag-img' : (size==='sm' ? 'flag-img-sm' : 'flag-img');
-  if (url) return `<img class="${cls}" src="${url}" alt="${teamName}" onerror="this.outerHTML='<span class=flag-fallback>🏳️</span>'">`;
-  return `<span class="flag-fallback">🏳️</span>`;
-}
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){ navLinks.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+  });
 
-// Quick flag for scorebar
-['mex','rsa','kor','cze','can','bih','usa','pry'].forEach(id => {
-  const el = document.getElementById('f-'+id);
-  if (el) el.innerHTML = '';
-});
-const SB_FLAGS = {
-  'mex':'mx','rsa':'za','kor':'kr','cze':'cz',
-  'can':'ca','bih':'ba','usa':'us','pry':'py'
-};
-Object.entries(SB_FLAGS).forEach(([id, code]) => {
-  const el = document.getElementById('f-'+id);
-  if (el) el.outerHTML = `<img style="width:18px;height:13px;object-fit:cover;border-radius:2px;margin:0 2px;" src="https://flagcdn.com/w40/${code}.png" alt="">`;
-});
+  var translations = {
+    en: {
+      'nav.about':'about','nav.focus':'focus','nav.work':'work','nav.why':'why-arc-house','nav.connect':'connect',
+      'hero.role':'Web3 creator at Loyal Company, and an on-chain builder / RWA & domains investor working out of Hanoi, Vietnam.',
+      'hero.pill.age':'25 yo','hero.pill.height':'172 cm','hero.pill.weight':'70 kg','hero.pill.marital':'Single','hero.pill.zodiac':'Pisces',
+      'hero.personal_note':'Cheerful, easygoing, and gentle — freelancing in crypto trading and affiliate work, fluent in English, Vietnamese, and Chinese. Always up for meeting new people; single and open to it.',
+      'hero.cta.why':'Why Arc House','hero.cta.work':'See selected work',
+      'idcard.k.handle':'handle','idcard.k.company':'company','idcard.k.location':'location','idcard.k.based':'based','idcard.k.region':'region focus','idcard.k.discord':'discord','idcard.k.status':'status','idcard.k.human':'human check',
+      'idcard.v.region':'APAC · AU · NZ','idcard.v.status':'building','idcard.v.human':'verified ✓',
+      'pill.sectors.trading':'Exchanges & Trading','pill.sectors.identity':'Identity','pill.sectors.rwa':'RWA',
+      'pill.role.researcher':'Researcher / Analyst','pill.role.developer':'Developer','pill.role.investor':'Investor',
+      'pill.region.apac':'Asia-Pacific','pill.region.au':'Australia','pill.region.nz':'New Zealand',
+      'about.kicker':'about','about.heading':'A builder who trades, and a trader who builds',
+      'about.p1':"I'm Trần Đức Thịnh (<strong>marginla</strong>), a Web3 enthusiast and crypto content creator with a strong passion for blockchain innovation, digital culture, and emerging technologies. Over the past few years I've actively explored the crypto ecosystem, with hands-on experience across DeFi, NFTs, AI-related projects, on-chain communities, and social growth within Web3.",
+      'about.p2':"I'm especially drawn to market narratives, domain branding, community engagement, and the evolution of decentralized technologies. My focus isn't only on finding promising projects early — it's on building real connections and feeding useful insight back into the wider crypto community.",
+      'about.p3':"Always learning, always building, and always trying to stay ahead of the next trend in Web3.",
+      'focus.kicker':'focus & stack','focus.heading':'Where I spend my time',
+      'focus.cell.sectors':'sectors','focus.cell.languages':'languages','focus.cell.role':'role','focus.cell.region':'region',
+      'work.kicker':'selected work','work.heading':"What I've actually shipped",
+      'work.tag1':'Arc Testnet · hackathon build','work.desc1':'A DeFi payment dApp built on Arc Testnet: wallet connection, USDC send/receive with QR codes, USDC↔EURC swap, lending & borrowing, liquidity pools, and an integrated AI agent tab — shipped as a single-file app end to end.',
+      'work.tag2':'Doma Mainnet · trading infra','work.title2':'Domain-token tooling','work.desc2':'A Node.js sniper bot for newly launched domain tokens with slippage-protected execution, plus an MCP-connected research workflow for marketplace listings and purchase automation — built alongside a live fractional-domain portfolio.',
+      'work.tag3':'Personal tool','work.title3':'Web3 dashboard','work.desc3':'A self-built, single-file dashboard for tracking on-chain positions and market context across the projects I follow — iterated over several versions as my own needs changed.',
+      'why.kicker':'why arc house','why.heading':"I've already built on Arc — I want to keep going somewhere with people who care",
+      'why.p1':"I'm applying to Arc House because I've spent time building on Arc, not just watching it from the sidelines. For a hackathon I built <strong>ArcPay</strong>, a DeFi payment app on Arc Testnet with wallet connection, USDC send/receive, QR-code payments, USDC↔EURC swaps, lending, borrowing, and liquidity pools. That project is what made <strong>USDC as native gas</strong> click for me in a way reading about it never did — when the gas token and the settlement asset are the same thing, payments UX becomes a genuinely different design problem, and it's the single feature of Arc I'm most excited to keep building around.",
+      'why.p2':"The rest of my work sits right next to that. I invest in and build tooling around tokenized domains on Doma — a sniper bot for new domain-token launches and an MCP-based research workflow for the marketplace. Domains are one of the clearer on-chain identity and RWA primitives that already exist, and a chain built around real payments feels like a natural settlement layer for that kind of asset to eventually move through.",
+      'why.p3':"Joining Arc House is a chance to bring that identity/RWA angle into a room that's mostly thinking about trading and exchanges, and to pressure-test my own payments work against builders who are further along than I am.",
+      'why.quote':"USDC as native gas is the one Arc feature I'm most excited to keep building around.",
+      'why.cite':'— from building ArcPay on Arc Testnet',
+      'mutual.kicker':'mutual benefit','mutual.heading':'What this membership is worth to both sides',
+      'mutual.bring.heading':'what I bring to Arc House',
+      'mutual.bring.li1':'Hands-on Arc Testnet build experience with ArcPay, not just theory about the chain',
+      'mutual.bring.li2':'TypeScript/JavaScript and C++ engineering I can put toward Arc-native tooling',
+      'mutual.bring.li3':'A domains/RWA and identity lens the trading-heavy side of the community can borrow from',
+      'mutual.bring.li4':'Content and community-building practice I can point at Arc for an APAC audience',
+      'mutual.bring.li5':'Direct feedback from someone already shipping payments UX on the chain',
+      'mutual.want.heading':"what I'm hoping to get back",
+      'mutual.want.li1':'Closer contact with the Arc team and builders further along than I am',
+      'mutual.want.li2':'Early signal on where the payments and RWA narrative is heading',
+      'mutual.want.li3':'Technical feedback on ArcPay and whatever I build on Arc next',
+      'mutual.want.li4':'Collaborators for domains × payments crossover ideas with Doma',
+      'mutual.want.li5':'A community to route my APAC-region insight and market reads through',
+      'player.now_playing':'now playing','player.track_placeholder':'A track I love — playlist coming soon',
+      'connect.kicker':'connect','connect.heading':"Let's build",'connect.intro':'Reachable across the usual places — happy to talk Arc, Doma, domains, or payments UX any time.',
+      'connect.discord':'Discord: @marginla','footer.tag':'marginla — human, not an LLM'
+    },
+    vi: {
+      'nav.about':'giới thiệu','nav.focus':'trọng tâm','nav.work':'dự án','nav.why':'vì sao arc house','nav.connect':'liên hệ',
+      'hero.role':'Nhà sáng tạo Web3 tại Loyal Company, đồng thời là builder on-chain và nhà đầu tư RWA & domain, làm việc tại Hà Nội, Việt Nam.',
+      'hero.pill.age':'25 tuổi','hero.pill.height':'172cm','hero.pill.weight':'70kg','hero.pill.marital':'Độc thân','hero.pill.zodiac':'Song Ngư',
+      'hero.personal_note':'Vui vẻ, hiền lành, dễ gần — làm freelancer về crypto trading và affiliate, nói được tiếng Anh, Việt và Trung. Luôn sẵn sàng làm quen bạn mới, đang độc thân và để ngỏ.',
+      'hero.cta.why':'Vì sao chọn Arc House','hero.cta.work':'Xem các dự án tiêu biểu',
+      'idcard.k.handle':'handle','idcard.k.company':'công ty','idcard.k.location':'vị trí','idcard.k.based':'hiện đang ở','idcard.k.region':'khu vực trọng tâm','idcard.k.discord':'discord','idcard.k.status':'trạng thái','idcard.k.human':'xác minh',
+      'idcard.v.region':'APAC · Úc · New Zealand','idcard.v.status':'đang xây dựng','idcard.v.human':'đã xác minh ✓',
+      'pill.sectors.trading':'Giao dịch & Sàn','pill.sectors.identity':'Định danh','pill.sectors.rwa':'RWA (Tài sản thực)',
+      'pill.role.researcher':'Nghiên cứu / Phân tích','pill.role.developer':'Developer','pill.role.investor':'Nhà đầu tư',
+      'pill.region.apac':'Châu Á - Thái Bình Dương','pill.region.au':'Úc','pill.region.nz':'New Zealand',
+      'about.kicker':'giới thiệu','about.heading':'Một builder biết trade, một trader biết build',
+      'about.p1':"Tôi là Trần Đức Thịnh (<strong>marginla</strong>), một người đam mê Web3 và là nhà sáng tạo nội dung crypto với niềm yêu thích mạnh mẽ dành cho đổi mới blockchain, văn hoá số và công nghệ mới. Trong vài năm qua tôi đã chủ động khám phá hệ sinh thái crypto, với kinh nghiệm thực tế trong DeFi, NFT, các dự án liên quan đến AI, cộng đồng on-chain và phát triển mạng xã hội trong không gian Web3.",
+      'about.p2':"Tôi đặc biệt quan tâm đến các câu chuyện thị trường, xây dựng thương hiệu domain, gắn kết cộng đồng và sự phát triển của công nghệ phi tập trung. Trọng tâm của tôi không chỉ là tìm ra dự án tiềm năng sớm — mà còn là xây dựng những kết nối thật sự và đóng góp giá trị trở lại cho cộng đồng crypto.",
+      'about.p3':"Luôn học hỏi, luôn xây dựng, và luôn cố gắng đi trước xu hướng tiếp theo của Web3.",
+      'focus.kicker':'trọng tâm & công nghệ','focus.heading':'Nơi tôi dành phần lớn thời gian',
+      'focus.cell.sectors':'lĩnh vực','focus.cell.languages':'ngôn ngữ lập trình','focus.cell.role':'vai trò','focus.cell.region':'khu vực',
+      'work.kicker':'dự án tiêu biểu','work.heading':'Những gì tôi đã thực sự làm ra',
+      'work.tag1':'Arc Testnet · dự án hackathon','work.desc1':'Một DeFi payment dApp xây trên Arc Testnet: kết nối ví, gửi/nhận USDC kèm mã QR, swap USDC↔EURC, cho vay & vay, liquidity pool, và một tab AI agent tích hợp — hoàn thiện dưới dạng ứng dụng single-file từ đầu đến cuối.',
+      'work.tag2':'Doma Mainnet · hạ tầng giao dịch','work.title2':'Công cụ giao dịch domain-token','work.desc2':'Một sniper bot viết bằng Node.js cho các domain-token mới ra mắt, có bảo vệ trượt giá, cùng một quy trình nghiên cứu kết nối qua MCP cho listing trên marketplace và tự động hoá mua — song song với một danh mục fractional-domain đang nắm giữ.',
+      'work.tag3':'Công cụ cá nhân','work.title3':'Dashboard Web3','work.desc3':'Một dashboard single-file tự xây để theo dõi vị thế on-chain và bối cảnh thị trường của các dự án tôi theo dõi — được lặp lại qua nhiều phiên bản khi nhu cầu của tôi thay đổi.',
+      'why.kicker':'vì sao chọn arc house','why.heading':'Tôi đã build trên Arc rồi — tôi muốn tiếp tục cùng những người thực sự quan tâm',
+      'why.p1':"Tôi ứng tuyển vào Arc House vì tôi đã dành thời gian build trên Arc, chứ không chỉ đứng ngoài quan sát. Cho một hackathon, tôi đã build <strong>ArcPay</strong>, một ứng dụng thanh toán DeFi trên Arc Testnet với kết nối ví, gửi/nhận USDC, thanh toán bằng mã QR, swap USDC↔EURC, cho vay, vay và liquidity pool. Chính dự án đó khiến tôi thực sự hiểu ý nghĩa của <strong>USDC làm gas gốc</strong> theo cách mà đọc lý thuyết không bao giờ mang lại — khi token gas và tài sản thanh toán là một, trải nghiệm thanh toán trở thành một bài toán thiết kế hoàn toàn khác, và đó là tính năng của Arc mà tôi hào hứng nhất để tiếp tục xây dựng xung quanh nó.",
+      'why.p2':"Phần còn lại trong công việc của tôi nằm ngay cạnh đó. Tôi đầu tư và xây công cụ xoay quanh domain được token hoá trên Doma — một sniper bot cho các domain-token mới ra mắt và một quy trình nghiên cứu dựa trên MCP cho marketplace. Domain là một trong những primitive về định danh on-chain và RWA rõ ràng nhất đã tồn tại, và một chain được xây quanh thanh toán thực tế có vẻ là lớp thanh toán tự nhiên để loại tài sản đó dịch chuyển qua trong tương lai.",
+      'why.p3':"Gia nhập Arc House là cơ hội để tôi mang góc nhìn về định danh/RWA vào một cộng đồng phần lớn đang nghĩ về giao dịch và sàn, đồng thời kiểm chứng công việc thanh toán của chính mình trước những builder đã đi xa hơn tôi.",
+      'why.quote':"USDC làm gas gốc là tính năng duy nhất của Arc mà tôi hào hứng nhất để tiếp tục xây dựng xung quanh nó.",
+      'why.cite':'— từ việc build ArcPay trên Arc Testnet',
+      'mutual.kicker':'lợi ích hai chiều','mutual.heading':'Giá trị của việc trở thành thành viên, cho cả hai phía',
+      'mutual.bring.heading':'những gì tôi mang đến cho Arc House',
+      'mutual.bring.li1':'Kinh nghiệm build thực tế trên Arc Testnet với ArcPay, không chỉ là lý thuyết về chain',
+      'mutual.bring.li2':'Kỹ năng lập trình TypeScript/JavaScript và C++ có thể áp dụng cho công cụ trên Arc',
+      'mutual.bring.li3':'Góc nhìn về domain/RWA và định danh mà phía cộng đồng thiên về giao dịch có thể tham khảo',
+      'mutual.bring.li4':'Kinh nghiệm làm nội dung và xây cộng đồng mà tôi có thể hướng về Arc cho khán giả khu vực APAC',
+      'mutual.bring.li5':'Phản hồi trực tiếp từ một người đã thực sự triển khai trải nghiệm thanh toán trên chain',
+      'mutual.want.heading':'những gì tôi mong nhận lại',
+      'mutual.want.li1':'Kết nối gần hơn với đội ngũ Arc và các builder đi trước tôi',
+      'mutual.want.li2':'Tín hiệu sớm về hướng đi của câu chuyện thanh toán và RWA',
+      'mutual.want.li3':'Phản hồi kỹ thuật cho ArcPay và bất kỳ thứ gì tôi build tiếp theo trên Arc',
+      'mutual.want.li4':'Cộng sự cho các ý tưởng giao thoa giữa domain × thanh toán cùng Doma',
+      'mutual.want.li5':'Một cộng đồng để chia sẻ góc nhìn thị trường và khu vực APAC của tôi',
+      'player.now_playing':'đang phát','player.track_placeholder':'Một bài tôi thích — playlist đầy đủ sẽ cập nhật sau',
+      'connect.kicker':'liên hệ','connect.heading':'Cùng build nhé','connect.intro':'Có thể liên hệ qua các kênh quen thuộc bên dưới — sẵn sàng nói chuyện về Arc, Doma, domain, trải nghiệm thanh toán, hoặc bất cứ điều gì khác.',
+      'connect.discord':'Discord: @marginla','footer.tag':'marginla — con người thật, không phải LLM'
+    },
+    zh: {
+      'nav.about':'关于','nav.focus':'专注领域','nav.work':'项目作品','nav.why':'为什么加入arc house','nav.connect':'联系方式',
+      'hero.role':'在 Loyal Company 担任 Web3 创作者，同时是一名链上 builder，专注于 RWA 与域名投资，常驻越南河内。',
+      'hero.pill.age':'25岁','hero.pill.height':'172cm','hero.pill.weight':'70kg','hero.pill.marital':'单身','hero.pill.zodiac':'双鱼座',
+      'hero.personal_note':'开朗、随和、容易相处——目前从事自由职业，做加密货币交易与联盟营销，能用英语、越南语和中文交流。一直乐于结识新朋友，目前单身，对新的连接保持开放。',
+      'hero.cta.why':'为什么选择 Arc House','hero.cta.work':'查看代表作品',
+      'idcard.k.handle':'handle','idcard.k.company':'公司','idcard.k.location':'所在城市','idcard.k.based':'常驻地','idcard.k.region':'关注区域','idcard.k.discord':'discord','idcard.k.status':'状态','idcard.k.human':'人机验证',
+      'idcard.v.region':'APAC · 澳大利亚 · 新西兰','idcard.v.status':'构建中','idcard.v.human':'已验证 ✓',
+      'pill.sectors.trading':'交易所与交易','pill.sectors.identity':'身份认证','pill.sectors.rwa':'RWA（现实资产）',
+      'pill.role.researcher':'研究员 / 分析师','pill.role.developer':'开发者','pill.role.investor':'投资者',
+      'pill.region.apac':'亚太地区','pill.region.au':'澳大利亚','pill.region.nz':'新西兰',
+      'about.kicker':'关于我','about.heading':'既是交易者，也是构建者',
+      'about.p1':'我是陈德盛（<strong>marginla</strong>），一名 Web3 爱好者和加密内容创作者，对区块链创新、数字文化和新兴技术抱有强烈热情。过去几年里，我积极探索加密生态系统，在 DeFi、NFT、AI 相关项目、链上社区以及 Web3 社交增长方面积累了实际经验。',
+      'about.p2':'我特别关注市场叙事、域名品牌、社区运营以及去中心化技术的演进。我的重点不仅是尽早发现有潜力的项目，更是建立真正的连接，并为更广泛的加密社区贡献有价值的见解。',
+      'about.p3':'持续学习，持续构建，始终努力走在 Web3 下一个趋势的前面。',
+      'focus.kicker':'专注领域与技术栈','focus.heading':'我把时间花在哪里',
+      'focus.cell.sectors':'行业方向','focus.cell.languages':'编程语言','focus.cell.role':'角色','focus.cell.region':'关注区域',
+      'work.kicker':'代表作品','work.heading':'我实际做出来的东西',
+      'work.tag1':'Arc Testnet · 黑客松作品','work.desc1':'一个基于 Arc Testnet 构建的 DeFi 支付应用：钱包连接、USDC 收发（含二维码）、USDC↔EURC 兑换、借贷、流动性池，以及一个集成的 AI Agent 标签页——从头到尾以单文件应用的形式完成。',
+      'work.tag2':'Doma 主网 · 交易基础设施','work.title2':'域名代币工具','work.desc2':'一个用 Node.js 编写的新上线域名代币抢购机器人，带有防滑点保护机制，并配有基于 MCP 的市场研究与自动购买流程——与我持有的碎片化域名投资组合同步构建。',
+      'work.tag3':'个人工具','work.title3':'Web3 仪表盘','work.desc3':'一个我自己开发的单文件仪表盘，用于跟踪我关注的项目的链上仓位和市场动态——随着需求变化迭代了多个版本。',
+      'why.kicker':'为什么加入 arc house','why.heading':'我已经在 Arc 上构建过——我想和真正在乎的人继续做下去',
+      'why.p1':'我申请加入 Arc House，是因为我已经花时间在 Arc 上真正构建过，而不只是在旁边观望。为了参加一次黑客松，我构建了 <strong>ArcPay</strong>——一个基于 Arc Testnet 的 DeFi 支付应用，支持钱包连接、USDC 收发、二维码支付、USDC↔EURC 兑换、借贷以及流动性池。正是这个项目让我真正理解了 <strong>USDC 作为原生 Gas</strong> 的意义，这是单纯阅读资料永远无法给到的体会——当 Gas 代币和结算资产是同一个东西时，支付体验就变成了一个完全不同的设计问题，这也是 Arc 让我最想继续深入构建的一个功能。',
+      'why.p2':'我其余的工作也与此紧密相关。我在 Doma 上投资并构建围绕代币化域名的工具——一个针对新上线域名代币的抢购机器人，以及一套基于 MCP 的市场研究流程。域名是目前已经存在的、较为清晰的链上身份和 RWA 原语之一，而一条围绕真实支付构建的链，似乎正是这类资产未来流转的自然结算层。',
+      'why.p3':'加入 Arc House，是一个把身份/RWA 视角带入一个大多数人还在关注交易和交易所的社区的机会，也是一个用比我更领先的构建者来检验自己支付相关工作的机会。',
+      'why.quote':'USDC 作为原生 Gas，是 Arc 中我最想继续围绕它构建的一个功能。',
+      'why.cite':'——来自在 Arc Testnet 上构建 ArcPay 的经历',
+      'mutual.kicker':'双向价值','mutual.heading':'这次加入对双方分别意味着什么',
+      'mutual.bring.heading':'我能为 Arc House 带来什么',
+      'mutual.bring.li1':'在 Arc Testnet 上通过 ArcPay 积累的实际构建经验，而不只是对这条链的理论了解',
+      'mutual.bring.li2':'可以用于 Arc 原生工具开发的 TypeScript/JavaScript 与 C++ 工程能力',
+      'mutual.bring.li3':'域名/RWA 与身份方面的视角，供以交易为主的社区成员参考',
+      'mutual.bring.li4':'可以为 Arc 服务的内容创作与社区运营经验，面向亚太受众',
+      'mutual.bring.li5':'来自一个已经在这条链上实际开发过支付体验的人的第一手反馈',
+      'mutual.want.heading':'我希望能获得什么',
+      'mutual.want.li1':'与 Arc 团队以及走在我前面的构建者建立更紧密的联系',
+      'mutual.want.li2':'关于支付与 RWA 叙事走向的早期信号',
+      'mutual.want.li3':'针对 ArcPay 以及我在 Arc 上后续项目的技术反馈',
+      'mutual.want.li4':'在域名 × 支付交叉领域，与 Doma 相关的潜在合作者',
+      'mutual.want.li5':'一个可以传递我亚太地区洞察与市场判断的社区',
+      'player.now_playing':'正在播放','player.track_placeholder':'我喜欢的一首歌——完整歌单稍后更新',
+      'connect.kicker':'联系方式','connect.heading':'一起来构建','connect.intro':'可以通过下面这些常用渠道联系我——很乐意聊聊 Arc、Doma、域名、支付体验，或者任何其他话题。',
+      'connect.discord':'Discord: @marginla','footer.tag':'marginla —— 真人，不是 LLM'
+    }
+  };
 
-// ══════════════════════════════════════════════
-// BACKGROUND SLIDESHOW
-// ══════════════════════════════════════════════
-const BG_IMAGES = [
-  'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&q=70&auto=format',
-  'https://images.unsplash.com/photo-1551958219-acbc595b2d5f?w=1600&q=70&auto=format',
-  'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=1600&q=70&auto=format',
-  'https://images.unsplash.com/photo-1459865264687-595d652de67e?w=1600&q=70&auto=format',
-  'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1600&q=70&auto=format',
-];
-const slides = document.querySelectorAll('.bg-slide');
-slides.forEach((s, i) => {
-  s.style.backgroundImage = `url('${BG_IMAGES[i]}')`;
-});
-let bgIdx = 0;
-function rotateBg() {
-  slides[bgIdx].classList.remove('active');
-  bgIdx = (bgIdx + 1) % slides.length;
-  slides[bgIdx].classList.add('active');
-}
-setInterval(rotateBg, 7000);
-
-// ══════════════════════════════════════════════
-// THEME TOGGLE
-// ══════════════════════════════════════════════
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.getElementById('theme-lbl').textContent = isDark ? 'LIGHT' : 'DARK';
-}
-
-// ══════════════════════════════════════════════
-// REAL DATA FROM openfootball API (no key needed)
-// ══════════════════════════════════════════════
-const API_URL = 'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
-
-let allMatches = [];
-let groupsData = {};
-
-// Known results (real, from news search)
-const KNOWN_SCORES = {
-  'Mexico_South Africa': { s1:2, s2:0, status:'final', scorers:[{team:'Mexico',name:'Raúl Jiménez',min:51},{team:'Mexico',name:'Lozano',min:78}], y1:1,y2:2,r1:0,r2:1,c1:7,c2:3,poss1:58,poss2:35 },
-  'South Korea_Czech Republic': { s1:0, s2:1, status:'final', scorers:[{team:'Czech Republic',name:'Schick',min:67}], y1:1,y2:0,r1:0,r2:0,c1:4,c2:5,poss1:42,poss2:55 },
-};
-
-async function loadMatches() {
-  try {
-    const res = await fetch(API_URL);
-    const data = await res.json();
-    allMatches = data.matches || [];
-
-    // Inject known scores
-    allMatches = allMatches.map(m => {
-      const key = `${m.team1}_${m.team2}`;
-      const score = KNOWN_SCORES[key];
-      if (score) return {...m, ...score};
-      // Determine status by date
-      const mDate = new Date(m.date + 'T00:00:00');
-      const today = new Date('2026-06-12');
-      if (mDate < today) return {...m, status:'upcoming-past'};
-      if (m.date === '2026-06-12') return {...m, status:'today'};
-      return {...m, status:'upcoming'};
+  function applyLanguage(lang){
+    if(!translations[lang]) lang = 'en';
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(translations[lang][key] !== undefined) el.textContent = translations[lang][key];
     });
-
-    buildGroupsData();
-    renderMatches();
-    renderStandingsGroups();
-  } catch(e) {
-    console.error('API error', e);
-    document.getElementById('matches-list').innerHTML = '<div class="loader">⚠️ Không tải được dữ liệu trực tiếp. Dùng dữ liệu offline.</div>';
-    loadOfflineData();
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-html');
+      if(translations[lang][key] !== undefined) el.innerHTML = translations[lang][key];
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+    root.setAttribute('lang', lang === 'zh' ? 'zh-CN' : lang);
+    try{ localStorage.setItem('lang', lang); }catch(e){}
   }
-}
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ applyLanguage(b.getAttribute('data-lang')); });
+  });
+  var savedLang = null;
+  try{ savedLang = localStorage.getItem('lang'); }catch(e){}
+  applyLanguage(savedLang || 'en');
 
-function buildGroupsData() {
-  groupsData = {};
-  allMatches.filter(m => m.group).forEach(m => {
-    const g = m.group;
-    if (!groupsData[g]) groupsData[g] = { teams:{} };
-    [m.team1, m.team2].forEach(t => {
-      if (!groupsData[g].teams[t]) groupsData[g].teams[t] = {name:t,pts:0,w:0,d:0,l:0,gf:0,ga:0};
+  /* ---- Avatar & audio hooks ----
+     Leave these two constants empty to keep the initials avatar + demo tone.
+     Once real files are embedded (base64 data URIs), the real photo/track take over automatically. */
+  var AVATAR_DATA_URI = '';
+  var REAL_AUDIO_SRC = '';
+
+  if(AVATAR_DATA_URI){
+    var avatarEl = document.getElementById('avatarCircle');
+    avatarEl.innerHTML = '';
+    var img = document.createElement('img');
+    img.src = AVATAR_DATA_URI;
+    img.alt = 'Trần Đức Thịnh';
+    avatarEl.appendChild(img);
+  }
+
+  var audioCtx = null, oscillators = [], gainNode = null, realAudioEl = null;
+  var playerEl = document.getElementById('musicPlayer');
+  var playBtn = document.getElementById('playBtn');
+
+  function ensureRealAudio(){
+    if(!realAudioEl){
+      realAudioEl = document.createElement('audio');
+      realAudioEl.src = REAL_AUDIO_SRC;
+      realAudioEl.loop = true;
+    }
+    return realAudioEl;
+  }
+  function startTone(){
+    if(!audioCtx){ audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }
+    if(audioCtx.state === 'suspended'){ audioCtx.resume(); }
+    gainNode = audioCtx.createGain();
+    gainNode.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.045, audioCtx.currentTime + 0.4);
+    gainNode.connect(audioCtx.destination);
+    var freqs = [220.00, 261.63, 329.63, 392.00];
+    oscillators = freqs.map(function(f, i){
+      var o = audioCtx.createOscillator();
+      o.type = 'sine';
+      o.frequency.value = f;
+      var g = audioCtx.createGain();
+      g.gain.value = 0.6 / (i+1);
+      o.connect(g);
+      g.connect(gainNode);
+      o.start();
+      return o;
     });
-    if (m.status === 'final') {
-      const t1 = groupsData[g].teams[m.team1];
-      const t2 = groupsData[g].teams[m.team2];
-      const s1 = m.s1||0, s2 = m.s2||0;
-      t1.gf += s1; t1.ga += s2;
-      t2.gf += s2; t2.ga += s1;
-      if (s1 > s2) { t1.w++; t1.pts+=3; t2.l++; }
-      else if (s1 < s2) { t2.w++; t2.pts+=3; t1.l++; }
-      else { t1.d++; t1.pts++; t2.d++; t2.pts++; }
+  }
+  function stopTone(){
+    if(gainNode && audioCtx){
+      try{ gainNode.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.25); }catch(e){}
+    }
+    var toStop = oscillators;
+    oscillators = [];
+    setTimeout(function(){
+      toStop.forEach(function(o){ try{ o.stop(); }catch(e){} });
+      if(gainNode){ try{ gainNode.disconnect(); }catch(e){} gainNode = null; }
+    }, 300);
+  }
+  playBtn.addEventListener('click', function(){
+    var playing = playerEl.getAttribute('data-state') === 'playing';
+    if(playing){
+      if(REAL_AUDIO_SRC){ ensureRealAudio().pause(); } else { stopTone(); }
+      playerEl.setAttribute('data-state','paused');
+    } else {
+      try{
+        if(REAL_AUDIO_SRC){ ensureRealAudio().play().catch(function(){}); } else { startTone(); }
+        playerEl.setAttribute('data-state','playing');
+      }catch(e){}
     }
   });
-}
-
-function renderMatches() {
-  const today = '2026-06-12';
-  const todayMatches = allMatches.filter(m => m.date === today || m.status === 'final');
-  const upcomingFew = allMatches.filter(m => m.date > today && m.group).slice(0, 10);
-  const toShow = [...todayMatches.slice(0,12), ...upcomingFew];
-  
-  document.getElementById('match-badge').textContent = `${toShow.length} trận`;
-
-  const html = toShow.map(m => {
-    const isFinal = m.status === 'final';
-    const isToday = m.date === today;
-    const statusHtml = isFinal
-      ? `<span class="mcard-status s-ft">KẾT THÚC</span>`
-      : isToday
-      ? `<span class="mcard-status s-up">${formatTime(m.time)}</span>`
-      : `<span class="mcard-status s-up">${m.date.slice(5)} · ${formatTime(m.time)}</span>`;
-
-    const scoreOrDash = isFinal
-      ? `<div class="mscore-row"><div class="mscore">${m.s1}</div><div class="mscore-sep">–</div><div class="mscore">${m.s2}</div></div>`
-      : `<div class="mscore-row"><div class="mscore" style="color:var(--text2)">–</div><div class="mscore-sep" style="font-size:12px">vs</div><div class="mscore" style="color:var(--text2)">–</div></div>`;
-
-    return `<div class="mcard ${isFinal?'':''}">
-      <div class="mcard-top">
-        <span class="mcard-meta">${m.group||'Vòng Knockout'} · ${m.ground||''}</span>
-        ${statusHtml}
-      </div>
-      <div class="mcard-teams">
-        <div class="mteam" onclick="showTeam('${esc(m.team1)}','${esc(m.group)}')">
-          ${flagHtml(m.team1)}
-          <div class="mteam-info">
-            <div class="mteam-name">${m.team1}</div>
-            <div class="mteam-hint">Chủ nhà</div>
-          </div>
-        </div>
-        <div class="mscore-block">
-          ${scoreOrDash}
-          <div class="mscore-time">${isFinal?'90\'':''}</div>
-        </div>
-        <div class="mteam away" onclick="showTeam('${esc(m.team2)}','${esc(m.group)}')">
-          ${flagHtml(m.team2)}
-          <div class="mteam-info">
-            <div class="mteam-name">${m.team2}</div>
-            <div class="mteam-hint">Khách</div>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-
-  document.getElementById('matches-list').innerHTML = html || '<div class="loader">Không có trận đấu hôm nay.</div>';
-}
-
-function formatTime(t) {
-  if (!t) return '';
-  // Convert UTC-X to Vietnam time (+7)
-  const m = t.match(/(\d+):(\d+)\s*UTC([+-]\d+)/);
-  if (m) {
-    let h = parseInt(m[1]), min = parseInt(m[2]), offset = parseInt(m[3]);
-    let utcH = h - offset; // convert to UTC
-    let vnH = (utcH + 7 + 24) % 24; // convert to UTC+7
-    return `${String(vnH).padStart(2,'0')}:${m[2]} (VN)`;
-  }
-  return t;
-}
-function esc(s) { return (s||'').replace(/'/g,"\\'"); }
-
-// ══════════════════════════════════════════════
-// STANDINGS
-// ══════════════════════════════════════════════
-function renderStandingsGroups() {
-  const groups = Object.keys(groupsData).sort();
-  const tabsEl = document.getElementById('grp-tabs');
-  tabsEl.innerHTML = groups.map((g,i) =>
-    `<div class="grp-tab ${i===0?'active':''}" onclick="showGroup('${g}',this)">${g.replace('Group ','Bảng ')}</div>`
-  ).join('');
-  if (groups.length) showGroup(groups[0], tabsEl.firstChild);
-}
-
-function showGroup(gName, el) {
-  document.querySelectorAll('.grp-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  const g = groupsData[gName];
-  if (!g) return;
-  const teams = Object.values(g.teams).sort((a,b)=>b.pts-a.pts||(b.gf-b.ga)-(a.gf-a.ga));
-  
-  let html = `<table class="stand-table">
-    <thead><tr>
-      <th>#</th><th colspan="2">ĐỘI</th><th>TR</th><th>T</th><th>H</th><th>B</th><th>BT</th><th>BB</th><th>+/-</th><th>Đ</th>
-    </tr></thead><tbody>`;
-  teams.forEach((t,i) => {
-    const gd = t.gf - t.ga;
-    const played = t.w + t.d + t.l;
-    html += `<tr>
-      <td class="rank-cell ${i<2?'q':''}">${i<2?'✓':(i+1)}</td>
-      <td>${flagHtml(t.name,'sm')}</td>
-      <td style="font-weight:600;cursor:pointer;" onclick="showTeam('${esc(t.name)}','${esc(gName)}')">${t.name}</td>
-      <td>${played}</td><td>${t.w}</td><td>${t.d}</td><td>${t.l}</td>
-      <td>${t.gf}</td><td>${t.ga}</td>
-      <td style="color:${gd>0?'var(--green)':gd<0?'var(--live)':'var(--text2)'}">${gd>0?'+':''}${gd}</td>
-      <td class="pts-cell">${t.pts}</td>
-    </tr>`;
-  });
-  html += '</tbody></table>';
-  document.getElementById('stand-content').innerHTML = html;
-}
-
-// ══════════════════════════════════════════════
-// TEAM MODAL with AI data
-// ══════════════════════════════════════════════
-const TEAM_STATS = {
-  'Mexico': { poss:58, shots:14, onTarget:7, corners:7, yellow:1, red:0, goals:[{name:'Raúl Jiménez',min:51},{name:'Lozano',min:78}], players:[
-    {num:1,name:'Guillermo Ochoa',pos:'GK',goals:0,ast:0,y:0,r:0},
-    {num:4,name:'Edson Álvarez',pos:'CDM',goals:0,ast:0,y:0,r:0},
-    {num:9,name:'Raúl Jiménez',pos:'CF',goals:1,ast:0,y:0,r:0},
-    {num:14,name:'Héctor Herrera',pos:'CM',goals:0,ast:0,y:1,r:0},
-    {num:22,name:'Hirving Lozano',pos:'LW',goals:1,ast:0,y:0,r:0},
-  ]},
-  'South Africa': { poss:35, shots:4, onTarget:1, corners:3, yellow:2, red:1, goals:[], players:[
-    {num:1,name:'Ronwen Williams',pos:'GK',goals:0,ast:0,y:0,r:0},
-    {num:5,name:'Mothobi Mvala',pos:'CM',goals:0,ast:0,y:1,r:0},
-    {num:9,name:'Percy Tau',pos:'LW',goals:0,ast:0,y:0,r:0},
-    {num:10,name:'Themba Zwane',pos:'CAM',goals:0,ast:0,y:1,r:0},
-    {num:11,name:'Lyle Foster',pos:'CF',goals:0,ast:0,y:0,r:1},
-  ]},
-  'Czech Republic': { poss:55, shots:8, onTarget:3, corners:5, yellow:0, red:0, goals:[{name:'Patrik Schick',min:67}], players:[
-    {num:1,name:'Jiří Staněk',pos:'GK',goals:0,ast:0,y:0,r:0},
-    {num:9,name:'Patrik Schick',pos:'CF',goals:1,ast:0,y:0,r:0},
-    {num:10,name:'Tomáš Souček',pos:'CM',goals:0,ast:0,y:0,r:0},
-    {num:8,name:'Lukáš Provod',pos:'LM',goals:0,ast:1,y:0,r:0},
-    {num:2,name:'Vladimír Coufal',pos:'RB',goals:0,ast:0,y:0,r:0},
-  ]},
-};
-
-const KNOWN_PLAYERS = {
-  'Brazil':[{num:10,name:'Vinicius Jr.',pos:'LW',goals:0,ast:0,y:0,r:0},{num:9,name:'Endrick',pos:'CF',goals:0,ast:0,y:0,r:0},{num:5,name:'Casemiro',pos:'CDM',goals:0,ast:0,y:0,r:0},{num:4,name:'Marquinhos',pos:'CB',goals:0,ast:0,y:0,r:0},{num:1,name:'Ederson',pos:'GK',goals:0,ast:0,y:0,r:0}],
-  'Argentina':[{num:10,name:'Lionel Messi',pos:'RW',goals:0,ast:0,y:0,r:0},{num:9,name:'Lautaro Martínez',pos:'CF',goals:0,ast:0,y:0,r:0},{num:11,name:'Ángel Di María',pos:'LW',goals:0,ast:0,y:0,r:0},{num:23,name:'Emiliano Martínez',pos:'GK',goals:0,ast:0,y:0,r:0},{num:5,name:'Leandro Paredes',pos:'CM',goals:0,ast:0,y:0,r:0}],
-  'France':[{num:10,name:'Kylian Mbappé',pos:'CF',goals:0,ast:0,y:0,r:0},{num:7,name:'Antoine Griezmann',pos:'SS',goals:0,ast:0,y:0,r:0},{num:6,name:"N'Golo Kanté",pos:'CDM',goals:0,ast:0,y:0,r:0},{num:9,name:'Olivier Giroud',pos:'CF',goals:0,ast:0,y:0,r:0},{num:1,name:'Mike Maignan',pos:'GK',goals:0,ast:0,y:0,r:0}],
-  'Spain':[{num:10,name:'Pedri',pos:'CM',goals:0,ast:0,y:0,r:0},{num:9,name:'Álvaro Morata',pos:'CF',goals:0,ast:0,y:0,r:0},{num:17,name:'Rodri',pos:'CDM',goals:0,ast:0,y:0,r:0},{num:25,name:'Ansu Fati',pos:'LW',goals:0,ast:0,y:0,r:0},{num:1,name:'Unai Simón',pos:'GK',goals:0,ast:0,y:0,r:0}],
-  'Germany':[{num:10,name:'Florian Wirtz',pos:'CAM',goals:0,ast:0,y:0,r:0},{num:7,name:'Kai Havertz',pos:'CF',goals:0,ast:0,y:0,r:0},{num:6,name:'Joshua Kimmich',pos:'RB',goals:0,ast:0,y:0,r:0},{num:13,name:'Thomas Müller',pos:'SS',goals:0,ast:0,y:0,r:0},{num:1,name:'Marc-André ter Stegen',pos:'GK',goals:0,ast:0,y:0,r:0}],
-  'England':[{num:9,name:'Harry Kane',pos:'CF',goals:0,ast:0,y:0,r:0},{num:10,name:'Jude Bellingham',pos:'CM',goals:0,ast:0,y:0,r:0},{num:7,name:'Bukayo Saka',pos:'RW',goals:0,ast:0,y:0,r:0},{num:11,name:'Phil Foden',pos:'LW',goals:0,ast:0,y:0,r:0},{num:1,name:'Jordan Pickford',pos:'GK',goals:0,ast:0,y:0,r:0}],
-  'Portugal':[{num:7,name:'Cristiano Ronaldo',pos:'CF',goals:0,ast:0,y:0,r:0},{num:8,name:'Bruno Fernandes',pos:'CAM',goals:0,ast:0,y:0,r:0},{num:17,name:'Rafael Leão',pos:'LW',goals:0,ast:0,y:0,r:0},{num:16,name:'Diogo Jota',pos:'CF',goals:0,ast:0,y:0,r:0},{num:1,name:'Diogo Costa',pos:'GK',goals:0,ast:0,y:0,r:0}],
-  'Netherlands':[{num:10,name:'Memphis Depay',pos:'CF',goals:0,ast:0,y:0,r:0},{num:4,name:'Virgil van Dijk',pos:'CB',goals:0,ast:0,y:0,r:0},{num:9,name:'Wout Weghorst',pos:'CF',goals:0,ast:0,y:0,r:0},{num:11,name:'Steven Bergwijn',pos:'RW',goals:0,ast:0,y:0,r:0},{num:1,name:'Jasper Cillessen',pos:'GK',goals:0,ast:0,y:0,r:0}],
-  'Japan':[{num:10,name:'Takefusa Kubo',pos:'RW',goals:0,ast:0,y:0,r:0},{num:9,name:'Kaoru Mitoma',pos:'LW',goals:0,ast:0,y:0,r:0},{num:18,name:'Yukinari Sugawara',pos:'RB',goals:0,ast:0,y:0,r:0},{num:7,name:'Junya Ito',pos:'RW',goals:0,ast:0,y:0,r:0},{num:1,name:'Shuichi Gonda',pos:'GK',goals:0,ast:0,y:0,r:0}],
-};
-
-async function showTeam(teamName, group) {
-  const modal = document.getElementById('modal');
-  document.getElementById('modal-name').textContent = teamName;
-  document.getElementById('modal-sub').textContent = (group||'').replace('Group','Bảng') + ' · FIFA World Cup 2026';
-  
-  const flagEl = document.getElementById('modal-flag-el');
-  const url = flagUrl(teamName);
-  flagEl.innerHTML = url ? `<img class="modal-flag-img" src="${url}" alt="${teamName}">` : `<span class="modal-flag-fb">🏳️</span>`;
-  
-  modal.classList.add('open');
-
-  const stats = TEAM_STATS[teamName];
-  const players = KNOWN_PLAYERS[teamName] || (stats && stats.players) || [];
-  
-  if (stats) {
-    renderTeamModal(teamName, stats, players, group);
-  } else if (players.length) {
-    renderTeamModal(teamName, {poss:50,shots:0,onTarget:0,corners:0,yellow:0,red:0,goals:[]}, players, group);
-  } else {
-    // Load from AI
-    document.getElementById('modal-body').innerHTML = '<div class="loader"><div class="spin"></div>Đang tải dữ liệu từ AI…</div>';
-    await loadTeamFromAI(teamName, group);
-  }
-}
-
-function renderTeamModal(teamName, stats, players, group) {
-  const goals = stats.goals || [];
-  const scorersHtml = goals.length
-    ? goals.map(g=>`<div class="scorer-pill">⚽ <strong>${g.name}</strong> <span class="scorer-min">${g.min}'</span></div>`).join('')
-    : '<span style="color:var(--text2);font-size:12px;">Chưa ghi bàn</span>';
-
-  let playersHtml = '';
-  if (players.length) {
-    playersHtml = `<table class="players-tbl">
-      <thead><tr><th>#</th><th>Cầu thủ</th><th>Vị trí</th><th>Bàn</th><th>KT</th><th>Thẻ</th></tr></thead>
-      <tbody>${players.map(p=>`<tr>
-        <td style="font-family:'JetBrains Mono',monospace;color:var(--text2);font-size:11px;">${p.num}</td>
-        <td style="font-weight:600;">${p.name}</td>
-        <td><span class="pos-badge">${p.pos}</span></td>
-        <td class="goals-cell">${p.goals?'⚽ '+p.goals:'–'}</td>
-        <td style="color:var(--text2);">${p.ast||'–'}</td>
-        <td>${Array(p.y||0).fill('<div class="card-y"></div>').join('')}${Array(p.r||0).fill('<div class="card-r"></div>').join('')||'–'}</td>
-      </tr>`).join('')}</tbody>
-    </table>`;
-  } else {
-    playersHtml = '<div style="color:var(--text2);font-size:12px;padding:8px 0;">Đang cập nhật dữ liệu đội hình...</div>';
-  }
-
-  document.getElementById('modal-body').innerHTML = `
-    <div class="stat-grid">
-      <div class="stat-box"><div class="stat-val">${stats.poss||50}%</div><div class="stat-lbl">Bóng bát cầu</div></div>
-      <div class="stat-box"><div class="stat-val">${stats.shots||0}</div><div class="stat-lbl">Sút bóng</div></div>
-      <div class="stat-box"><div class="stat-val">${stats.onTarget||0}</div><div class="stat-lbl">Trúng khung</div></div>
-      <div class="stat-box"><div class="stat-val">${stats.corners||0}</div><div class="stat-lbl">Phạt góc</div></div>
-      <div class="stat-box">
-        <div class="stat-val" style="display:flex;align-items:center;justify-content:center;gap:4px;font-size:20px;">
-          ${Array(stats.yellow||0).fill('<div class="card-y" style="width:14px;height:20px;border-radius:2px;"></div>').join('')||'<span style="font-size:28px;font-family:Bebas Neue">0</span>'}
-        </div>
-        <div class="stat-lbl">Thẻ vàng</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val" style="color:${stats.red?'#ef4444':'var(--gold)'};">${stats.red||0}</div>
-        <div class="stat-lbl">Thẻ đỏ</div>
-      </div>
-    </div>
-    <div class="modal-sec">
-      <div class="modal-sec-title">⚽ Người ghi bàn</div>
-      <div class="scorers-list">${scorersHtml}</div>
-    </div>
-    <div class="modal-sec">
-      <div class="modal-sec-title">👥 Đội hình nổi bật</div>
-      ${playersHtml}
-    </div>
-  `;
-}
-
-async function loadTeamFromAI(teamName, group) {
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-6', max_tokens:800,
-        messages:[{role:'user',content:`Đội tuyển ${teamName} tại World Cup 2026. Trả về JSON duy nhất (không markdown): {"poss":50,"shots":0,"onTarget":0,"corners":0,"yellow":0,"red":0,"goals":[],"players":[{"num":1,"name":"tên","pos":"GK","goals":0,"ast":0,"y":0,"r":0}]} Liệt kê 5 cầu thủ quan trọng nhất.`}]
-      })
-    });
-    const data = await res.json();
-    const txt = (data.content?.[0]?.text||'').replace(/```json|```/g,'').trim();
-    const stats = JSON.parse(txt);
-    renderTeamModal(teamName, stats, stats.players||[], group);
-  } catch(e) {
-    renderTeamModal(teamName, {poss:50,shots:0,onTarget:0,corners:0,yellow:0,red:0,goals:[]}, [], group);
-  }
-}
-
-function closeModal() { document.getElementById('modal').classList.remove('open'); }
-
-// ══════════════════════════════════════════════
-// AI CHAT
-// ══════════════════════════════════════════════
-const AI_SYSTEM = `Bạn là chuyên gia phân tích bóng đá World Cup 2026, trả lời bằng tiếng Việt, súc tích và chuyên nghiệp.
-
-Thông tin thực tế đã biết:
-- World Cup 2026: 48 đội, 104 trận, 3 nước đăng cai (Mỹ, Canada, Mexico), 11/6–19/7/2026
-- Kết quả ngày 11/6: Mexico 2-0 Nam Phi (Jiménez 51', Lozano 78'; Nam Phi bị thẻ đỏ); Séc 1-0 Hàn Quốc (Schick 67')
-- Hôm nay 12/6: Canada vs Bosnia (22:00 VN); Ngày mai: USA vs Paraguay, Qatar vs Switzerland
-- Ứng viên vô địch: Pháp, Tây Ban Nha, Anh, Argentina (đương kim), Brazil, Đức, Bồ Đào Nha
-- Việt Nam không tham dự World Cup 2026
-- Messi (38 tuổi) thi đấu cho Argentina; Ronaldo cho Bồ Đào Nha; Mbappé cho Pháp; Vinicius cho Brazil`;
-
-async function sendAI() {
-  const input = document.getElementById('ai-input');
-  const btn = document.getElementById('ai-send-btn');
-  const msgs = document.getElementById('ai-msgs');
-  const text = input.value.trim();
-  if (!text || btn.disabled) return;
-
-  msgs.innerHTML += `<div class="ai-msg user">${text.replace(/</g,'&lt;')}</div>`;
-  input.value = ''; input.style.height = 'auto';
-  btn.disabled = true;
-
-  const loadId = 'ai-load-' + Date.now();
-  msgs.innerHTML += `<div class="ai-msg bot" id="${loadId}"><div class="typing"><span></span><span></span><span></span></div></div>`;
-  msgs.scrollTop = msgs.scrollHeight;
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-6', max_tokens:600,
-        system: AI_SYSTEM,
-        messages:[{role:'user', content:text}]
-      })
-    });
-    if (!res.ok) throw new Error('HTTP '+res.status);
-    const data = await res.json();
-    const reply = data.content?.[0]?.text || '❌ Không có phản hồi.';
-    document.getElementById(loadId).innerHTML = reply.replace(/\n/g,'<br>');
-  } catch(err) {
-    document.getElementById(loadId).innerHTML = `❌ Lỗi kết nối (${err.message}). Hãy thử lại.`;
-  }
-
-  btn.disabled = false;
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function askQuick(q) {
-  document.getElementById('ai-input').value = q;
-  sendAI();
-}
-
-// ══════════════════════════════════════════════
-// NEWS
-// ══════════════════════════════════════════════
-const STATIC_NEWS = [
-  {tag:'🔥 NÓNG',title:'Mexico thắng khai mạc 2-0 trước Nam Phi',body:'Raúl Jiménez (51\') và Lozano (78\') ghi bàn giúp Mexico thắng trận khai mạc trên sân nhà Estadio Azteca trước hơn 87.000 khán giả. Nam Phi bị thẻ đỏ ở hiệp 2.',time:'9 giờ trước'},
-  {tag:'⚽ KẾT QUẢ',title:'Schick giúp Séc hạ Hàn Quốc 1-0',body:'Patrik Schick ghi bàn duy nhất phút 67 giúp Cộng hòa Séc có 3 điểm đầu tiên tại World Cup 2026 trong trận đấu tại Los Angeles.',time:'10 giờ trước'},
-  {tag:'📋 HÔM NAY',title:'Canada vs Bosnia – Trận khai màn Bảng B',body:'16:00 UTC−4 (22:00 VN), sân BMO Field, Toronto. Canada đá trên sân nhà trước Bosnia & Herzegovina trong trận đấu đặc biệt của đội chủ nhà.',time:'1 giờ trước'},
-  {tag:'🏆 DỰ ĐOÁN',title:'Pháp và Tây Ban Nha dẫn đầu cửa vô địch',body:'Theo các nhà cái hàng đầu, Pháp và Tây Ban Nha là hai ứng viên số 1. Anh, Bồ Đào Nha, Đức theo sát. Argentina đương kim vô địch xếp hạng 2.',time:'5 giờ trước'},
-  {tag:'⭐ SÂN CỎ',title:'Messi lên tiếng trước thềm World Cup',body:'Lionel Messi khẳng định đây là kỳ World Cup cuối cùng của ông ở tuổi 38. Argentina quyết tâm bảo vệ chức vô địch trước đám đông hâm mộ khổng lồ.',time:'12 giờ trước'},
-  {tag:'🌟 CẦU THỦ',title:'Vinicius Jr. – Ngôi sao số 1 của Brazil',body:'Vinicius Junior được bầu là cầu thủ hay nhất thế giới năm 2025 và sẽ là tâm điểm của Brazil tại World Cup 2026. Trận Brazil vs Morocco ngày 14/6 là siêu phẩm cần xem.',time:'8 giờ trước'},
-];
-
-let newsLoaded = false;
-async function loadNews() {
-  if (newsLoaded) return;
-  const el = document.getElementById('news-full');
-  
-  // Render static first
-  renderNewsGrid(STATIC_NEWS, el);
-  newsLoaded = true;
-
-  // AI-enhanced
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-6', max_tokens:900,
-        messages:[{role:'user',content:`Tạo 4 tin tức World Cup 2026 thú vị, đa dạng chủ đề (chiến thuật, kỷ lục, cầu thủ trẻ, dự đoán). JSON duy nhất không markdown: {"news":[{"tag":"emoji + tên chủ đề","title":"tiêu đề hấp dẫn","body":"2-3 câu nội dung cụ thể","time":"X giờ trước"}]}`}]
-      })
-    });
-    const data = await res.json();
-    const txt = (data.content?.[0]?.text||'').replace(/```json|```/g,'').trim();
-    const extra = JSON.parse(txt).news || [];
-    renderNewsGrid([...STATIC_NEWS, ...extra.map(n=>({...n,tag:'🤖 AI · '+n.tag}))], el);
-  } catch(e) { /* keep static */ }
-}
-
-function renderNewsGrid(items, el) {
-  el.innerHTML = `<div class="news-grid">${items.map(n=>`
-    <div class="ncard">
-      <div class="ncard-tag">${n.tag}</div>
-      <div class="ncard-body">
-        <div class="ncard-title">${n.title}</div>
-        <div class="ncard-text">${n.body}</div>
-        <div class="ncard-time">${n.time}</div>
-      </div>
-    </div>`).join('')}</div>`;
-}
-
-// Sidebar news
-function renderSidebarNews() {
-  document.getElementById('sidebar-news').innerHTML = STATIC_NEWS.slice(0,4).map(n=>`
-    <div class="ncard">
-      <div class="ncard-tag">${n.tag}</div>
-      <div class="ncard-body">
-        <div class="ncard-title">${n.title}</div>
-        <div class="ncard-time">${n.time}</div>
-      </div>
-    </div>`).join('');
-}
-
-// ══════════════════════════════════════════════
-// TABS
-// ══════════════════════════════════════════════
-function switchTab(name, el) {
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('tab-'+name).classList.add('active');
-  if (name==='news') loadNews();
-  if (name==='standings') { if(Object.keys(groupsData).length===0) loadMatches(); }
-}
-
-function refreshAll() {
-  allMatches = [];
-  groupsData = {};
-  newsLoaded = false;
-  loadMatches();
-  renderSidebarNews();
-}
-
-// offline fallback
-function loadOfflineData() {
-  const fake = [
-    {round:'Matchday 1',date:'2026-06-11',team1:'Mexico',team2:'South Africa',group:'Group A',ground:'Mexico City',status:'final',s1:2,s2:0},
-    {round:'Matchday 1',date:'2026-06-11',team1:'South Korea',team2:'Czech Republic',group:'Group A',ground:'Guadalajara',status:'final',s1:0,s2:1},
-    {round:'Matchday 2',date:'2026-06-12',team1:'Canada',team2:'Bosnia & Herzegovina',group:'Group B',ground:'Toronto',status:'today'},
-    {round:'Matchday 2',date:'2026-06-12',team1:'USA',team2:'Paraguay',group:'Group D',ground:'Los Angeles',status:'today'},
-  ];
-  allMatches = fake;
-  buildGroupsData();
-  renderMatches();
-  renderStandingsGroups();
-}
-
-// ── INIT ──
-loadMatches();
-renderSidebarNews();
+})();
 </script>
+
 </body>
 </html>
