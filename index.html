@@ -92,13 +92,34 @@
 
   /* Profile header: avatar + name + player, first thing on the page */
   .profile-header{display:flex; align-items:center; gap:22px; flex-wrap:wrap; padding-bottom:30px; margin-bottom:34px; border-bottom:1px solid var(--line);}
+  .avatar-col{display:flex; flex-direction:column; align-items:center; gap:8px; flex-shrink:0;}
   .avatar-circle{position:relative; width:96px; height:96px; border-radius:50%; background:linear-gradient(135deg, var(--accent), var(--accent-soft)); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:1.4rem; color:var(--accent-ink); border:1px solid var(--line); flex-shrink:0; overflow:hidden;}
   .avatar-circle img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:50%;}
+  .donate-btn{font-family:var(--font-mono); font-size:.68rem; padding:5px 11px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--ink-dim); cursor:pointer; white-space:nowrap;}
+  .donate-btn:hover{color:var(--accent); border-color:var(--accent);}
   .profile-id-block{flex:1 1 auto; min-width:200px;}
   .profile-id-block h1{font-family:var(--font-display); font-weight:700; font-size:clamp(1.7rem,3.4vw,2.3rem); line-height:1.06; margin:0 0 4px; letter-spacing:-.02em;}
   .profile-id-block .handle{font-family:var(--font-mono); color:var(--accent); font-size:1rem; margin:0;}
   .profile-header .player{margin-left:auto;}
   @media (max-width:640px){ .profile-header{flex-direction:column; align-items:flex-start;} .profile-header .player{margin-left:0; width:100%;} }
+
+  /* Top referral banner */
+  .promo-banner{background:var(--accent);}
+  .promo-inner{display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; padding:10px 28px; max-width:1120px; margin:0 auto;}
+  .promo-text{color:var(--accent-ink); font-size:.86rem; font-weight:500;}
+  .promo-btn{background:var(--accent-ink); color:var(--accent); font-weight:700; padding:6px 16px; border-radius:999px; text-decoration:none; font-size:.8rem; white-space:nowrap;}
+  .promo-btn:hover{filter:brightness(.95);}
+
+  /* Donate modal */
+  .modal-overlay{position:fixed; inset:0; background:rgba(6,8,14,.55); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px;}
+  .modal-overlay[hidden]{display:none;}
+  .modal{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:30px 26px; max-width:340px; width:100%; position:relative; text-align:center;}
+  .modal-close{position:absolute; top:12px; right:12px; width:30px; height:30px; border-radius:8px; border:1px solid var(--line); background:var(--surface-2); cursor:pointer; color:var(--ink); font-size:.9rem; line-height:1;}
+  .modal h3{font-family:var(--font-display); margin:0 0 18px; font-size:1.15rem; font-weight:600;}
+  .donate-qr{margin-bottom:18px;}
+  .donate-qr img{width:100%; max-width:220px; border-radius:10px; border:1px solid var(--line); margin:0 auto; display:block;}
+  .donate-bank{border:1px solid var(--line); border-radius:10px; padding:2px 16px; margin-bottom:16px; text-align:left;}
+  .donate-copy{width:100%; justify-content:center;}
 
   .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:start;}
   @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
@@ -183,6 +204,13 @@
 </head>
 <body>
 
+<div class="promo-banner">
+  <div class="promo-inner">
+    <span class="promo-text" data-i18n="promo.text">New to Doma? Join with my referral link:</span>
+    <a class="promo-btn" href="https://app.doma.xyz/join/b53yxtjzuctd2" target="_blank" rel="noopener" data-i18n="promo.cta">Join Doma ↗</a>
+  </div>
+</div>
+
 <header class="site">
   <div class="wrap navrow">
     <div class="brand"><span class="dot"></span> marginla</div>
@@ -213,9 +241,12 @@
 
     <!-- AVATAR: put a file named avatar.png next to index.html in your repo and it will show up here automatically. -->
     <div class="profile-header">
-      <div class="avatar-circle" id="avatarCircle">
-        <span class="avatar-fallback">TĐT</span>
-        <img src="avatar.png" alt="Trần Đức Thịnh" onerror="this.style.display='none'">
+      <div class="avatar-col">
+        <div class="avatar-circle" id="avatarCircle">
+          <span class="avatar-fallback">TĐT</span>
+          <img src="avatar.png" alt="Trần Đức Thịnh" onerror="this.style.display='none'">
+        </div>
+        <button id="donateBtn" class="donate-btn" data-i18n="donate.tab">♥ Donate</button>
       </div>
       <div class="profile-id-block">
         <h1>Trần Đức Thịnh</h1>
@@ -291,7 +322,7 @@
         <p data-i18n="about.p3">Always learning, always building, and always trying to stay ahead of the next trend in Web3.</p>
       </div>
       <figure class="illus">
-        <img src="images/about.jpg" alt="" loading="lazy" onload="document.getElementById('aboutGrid').classList.remove('no-img')" onerror="this.parentElement.style.display='none'">
+        <img src="images/about.png" alt="" loading="lazy" onload="document.getElementById('aboutGrid').classList.remove('no-img')" onerror="this.parentElement.style.display='none'">
       </figure>
     </div>
   </div>
@@ -328,7 +359,7 @@
     <h2 class="htitle" data-i18n="work.heading">What I've actually shipped</h2>
     <div class="work-grid">
       <div class="work-card">
-        <figure class="work-thumb"><img src="images/work-arcpay.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></figure>
+        <figure class="work-thumb"><img src="images/work-arcpay.png" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></figure>
         <span class="tag" data-i18n="work.tag1">Arc Testnet · hackathon build</span>
         <h3>ArcPay</h3>
         <p data-i18n="work.desc1">A DeFi payment dApp built on Arc Testnet: wallet connection, USDC send/receive with QR codes, USDC↔EURC swap, lending &amp; borrowing, liquidity pools, and an integrated AI agent tab — shipped as a single-file app end to end.</p>
@@ -342,7 +373,7 @@
         <div class="stack"><span>Node.js</span><span>Doma Protocol</span><span>RWA</span></div>
       </div>
       <div class="work-card">
-        <figure class="work-thumb"><img src="images/work-dashboard.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></figure>
+        <figure class="work-thumb"><img src="images/work-dashboard.png" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></figure>
         <span class="tag" data-i18n="work.tag3">Personal tool</span>
         <h3 data-i18n="work.title3">Web3 dashboard</h3>
         <p data-i18n="work.desc3">A self-built, single-file dashboard for tracking on-chain positions and market context across the projects I follow — iterated over several versions as my own needs changed.</p>
@@ -369,7 +400,7 @@
         <cite data-i18n="why.cite">— from building ArcPay on Arc Testnet</cite>
       </blockquote>
       <figure class="illus why-illus">
-        <img src="images/why-arc-house.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <img src="images/why-arc-house.png" alt="" loading="lazy" onerror="this.parentElement.style.display='none'">
       </figure>
     </div>
   </div>
@@ -424,6 +455,22 @@
   <span data-i18n="footer.tag">marginla — human, not an LLM</span>
 </footer>
 
+<!-- DONATE MODAL: put a file named images/donate-qr.png next to index.html and it will show up in the popup automatically. -->
+<div class="modal-overlay" id="donateOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="donateTitle">
+    <button class="modal-close" id="donateClose" aria-label="Close">✕</button>
+    <h3 id="donateTitle" data-i18n="donate.title">Support / Donate</h3>
+    <figure class="donate-qr">
+      <img src="images/donate-qr.png" alt="Donation QR code" onerror="this.parentElement.style.display='none'">
+    </figure>
+    <div class="donate-bank">
+      <div class="field-row"><span class="k" data-i18n="donate.bank">bank</span><span class="v">BIDV</span></div>
+      <div class="field-row"><span class="k" data-i18n="donate.account">account no.</span><span class="v" id="donateAcc">4711828183</span></div>
+    </div>
+    <button class="btn btn-ghost donate-copy" id="donateCopyBtn" data-i18n="donate.copy">Copy account number</button>
+  </div>
+</div>
+
 <script>
 (function(){
   var root = document.documentElement;
@@ -445,6 +492,23 @@
   navToggle.addEventListener('click', function(){ navLinks.classList.toggle('open'); });
   navLinks.querySelectorAll('a').forEach(function(a){
     a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+  });
+
+  var donateBtn = document.getElementById('donateBtn');
+  var donateOverlay = document.getElementById('donateOverlay');
+  var donateClose = document.getElementById('donateClose');
+  var donateCopyBtn = document.getElementById('donateCopyBtn');
+  function openDonate(){ donateOverlay.hidden = false; document.body.style.overflow = 'hidden'; }
+  function closeDonate(){ donateOverlay.hidden = true; document.body.style.overflow = ''; }
+  donateBtn.addEventListener('click', openDonate);
+  donateClose.addEventListener('click', closeDonate);
+  donateOverlay.addEventListener('click', function(e){ if(e.target === donateOverlay) closeDonate(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !donateOverlay.hidden) closeDonate(); });
+  donateCopyBtn.addEventListener('click', function(){
+    var acc = document.getElementById('donateAcc').textContent;
+    var restore = donateCopyBtn.textContent;
+    function done(){ donateCopyBtn.textContent = translations[currentLang] ? translations[currentLang]['donate.copied'] : 'Copied!'; setTimeout(function(){ donateCopyBtn.textContent = restore; }, 1500); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(acc).then(done).catch(done); } else { done(); }
   });
 
   var translations = {
@@ -490,7 +554,9 @@
       'mutual.want.li5':'A community to route my APAC-region insight and market reads through',
       'player.now_playing':'now playing','player.track_placeholder':'A track I love — playlist coming soon',
       'connect.kicker':'connect','connect.heading':"Let's build",'connect.intro':'Reachable across the usual places — happy to talk Arc, Doma, domains, or payments UX any time.',
-      'connect.discord':'Discord: @marginla','footer.tag':'marginla — human, not an LLM'
+      'connect.discord':'Discord: @marginla','footer.tag':'marginla — human, not an LLM',
+      'promo.text':'New to Doma? Join with my referral link:','promo.cta':'Join Doma ↗',
+      'donate.tab':'♥ Donate','donate.title':'Support / Donate','donate.bank':'bank','donate.account':'account no.','donate.copy':'Copy account number','donate.copied':'Copied!'
     },
     vi: {
       'nav.about':'giới thiệu','nav.focus':'trọng tâm','nav.work':'dự án','nav.why':'vì sao arc house','nav.connect':'liên hệ',
@@ -534,7 +600,9 @@
       'mutual.want.li5':'Một cộng đồng để chia sẻ góc nhìn thị trường và khu vực APAC của tôi',
       'player.now_playing':'đang phát','player.track_placeholder':'Một bài tôi thích — playlist đầy đủ sẽ cập nhật sau',
       'connect.kicker':'liên hệ','connect.heading':'Cùng build nhé','connect.intro':'Có thể liên hệ qua các kênh quen thuộc bên dưới — sẵn sàng nói chuyện về Arc, Doma, domain, trải nghiệm thanh toán, hoặc bất cứ điều gì khác.',
-      'connect.discord':'Discord: @marginla','footer.tag':'marginla — con người thật, không phải LLM'
+      'connect.discord':'Discord: @marginla','footer.tag':'marginla — con người thật, không phải LLM',
+      'promo.text':'Mới biết đến Doma? Tham gia qua link giới thiệu của mình:','promo.cta':'Tham gia Doma ↗',
+      'donate.tab':'♥ Donate','donate.title':'Ủng hộ / Donate','donate.bank':'ngân hàng','donate.account':'số tài khoản','donate.copy':'Sao chép số tài khoản','donate.copied':'Đã sao chép!'
     },
     zh: {
       'nav.about':'关于','nav.focus':'专注领域','nav.work':'项目作品','nav.why':'为什么加入arc house','nav.connect':'联系方式',
@@ -578,12 +646,16 @@
       'mutual.want.li5':'一个可以传递我亚太地区洞察与市场判断的社区',
       'player.now_playing':'正在播放','player.track_placeholder':'我喜欢的一首歌——完整歌单稍后更新',
       'connect.kicker':'联系方式','connect.heading':'一起来构建','connect.intro':'可以通过下面这些常用渠道联系我——很乐意聊聊 Arc、Doma、域名、支付体验，或者任何其他话题。',
-      'connect.discord':'Discord: @marginla','footer.tag':'marginla —— 真人，不是 LLM'
+      'connect.discord':'Discord: @marginla','footer.tag':'marginla —— 真人，不是 LLM',
+      'promo.text':'刚接触 Doma？通过我的邀请链接加入：','promo.cta':'加入 Doma ↗',
+      'donate.tab':'♥ 打赏','donate.title':'支持 / 打赏','donate.bank':'银行','donate.account':'账号','donate.copy':'复制账号','donate.copied':'已复制！'
     }
   };
 
+  var currentLang = 'en';
   function applyLanguage(lang){
     if(!translations[lang]) lang = 'en';
+    currentLang = lang;
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var key = el.getAttribute('data-i18n');
       if(translations[lang][key] !== undefined) el.textContent = translations[lang][key];
